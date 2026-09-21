@@ -1,0 +1,19 @@
+{
+ "note": "advice_after_v20 \u00a71.1 (2026-09-20 night): rotating outdoor-forward sprint fold -- drone_train_0041/drone_train_0042 held out together with the aggressive pair 0021/0022 (as in stress_fold_sprint.json); the other sprint recordings stay in training.",
+ "held": [
+  "drone_train_0041",
+  "drone_train_0042",
+  "drone_train_0021",
+  "drone_train_0022"
+ ],
+ "groups": {
+  "drone_train_0042": [
+   "drone_train_0041",
+   "drone_train_0042"
+  ],
+  "drone_train_0022": [
+   "drone_train_0021",
+   "drone_train_0022"
+  ]
+ }
+}

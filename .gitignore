@@ -1,0 +1,13 @@
+__pycache__/
+*.pyc
+data/
+weights/
+runs/cache/
+runs/gputw_results/
+runs/lanes/
+*.pt
+*.npz
+*.aux
+*.log
+*.out
+.venv/

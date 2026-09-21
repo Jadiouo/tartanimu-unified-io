@@ -1,0 +1,111 @@
+{
+ "held": [
+  "drone_train_0019",
+  "drone_train_0020",
+  "drone_train_0021",
+  "drone_train_0022",
+  "drone_train_0023",
+  "drone_train_0024",
+  "drone_train_0035",
+  "drone_train_0036",
+  "drone_train_0037",
+  "drone_train_0038",
+  "drone_train_0039",
+  "drone_train_0040",
+  "drone_train_0041",
+  "drone_train_0042",
+  "drone_train_0101",
+  "drone_train_0102",
+  "drone_train_0129",
+  "drone_train_0130",
+  "drone_train_0131",
+  "drone_train_0161",
+  "drone_train_0162",
+  "drone_train_0187",
+  "drone_train_0202",
+  "drone_train_0248",
+  "drone_train_0269",
+  "drone_train_0270"
+ ],
+ "groups": {
+  "drone_train_0024": [
+   "drone_train_0023",
+   "drone_train_0024"
+  ],
+  "drone_train_0022": [
+   "drone_train_0021",
+   "drone_train_0022"
+  ],
+  "drone_train_0020": [
+   "drone_train_0019",
+   "drone_train_0020"
+  ],
+  "drone_train_0036": [
+   "drone_train_0035",
+   "drone_train_0036"
+  ],
+  "drone_train_0270": [
+   "drone_train_0270"
+  ],
+  "drone_train_0269": [
+   "drone_train_0269"
+  ],
+  "drone_train_0102": [
+   "drone_train_0102"
+  ],
+  "drone_train_0248": [
+   "drone_train_0248"
+  ],
+  "drone_train_0130": [
+   "drone_train_0130"
+  ],
+  "drone_train_0131": [
+   "drone_train_0131"
+  ],
+  "drone_train_0161": [
+   "drone_train_0161",
+   "drone_train_0162"
+  ],
+  "drone_train_0162": [
+   "drone_train_0161",
+   "drone_train_0162"
+  ],
+  "drone_train_0129": [
+   "drone_train_0129"
+  ],
+  "drone_train_0041": [
+   "drone_train_0041",
+   "drone_train_0042"
+  ],
+  "drone_train_0042": [
+   "drone_train_0041",
+   "drone_train_0042"
+  ],
+  "drone_train_0037": [
+   "drone_train_0037",
+   "drone_train_0039"
+  ],
+  "drone_train_0039": [
+   "drone_train_0037",
+   "drone_train_0039"
+  ],
+  "drone_train_0038": [
+   "drone_train_0038",
+   "drone_train_0040"
+  ],
+  "drone_train_0040": [
+   "drone_train_0038",
+   "drone_train_0040"
+  ],
+  "drone_train_0101": [
+   "drone_train_0101"
+  ],
+  "drone_train_0202": [
+   "drone_train_0202"
+  ],
+  "drone_train_0187": [
+   "drone_train_0187"
+  ]
+ },
+ "note": "2026-09-17 stress fold: holdout.json 12 + 12 flight groups stratified (4 gyro_mean>1.5, 4 sp_p90>6, 4 intermediate)"
+}

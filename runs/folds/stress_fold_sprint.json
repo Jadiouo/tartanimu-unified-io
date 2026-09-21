@@ -1,0 +1,19 @@
+{
+ "note": "sprint-split fold (2026-09-18 night): one outdoor-forward flight (0037/0039) and one aggressive flight (0021/0022) held out; the other sprint recordings 0038/0040/0041/0042 stay in training. Tests whether a rest-reference channel transfers to an unseen sprint of the same session.",
+ "held": [
+  "drone_train_0037",
+  "drone_train_0039",
+  "drone_train_0021",
+  "drone_train_0022"
+ ],
+ "groups": {
+  "drone_train_0039": [
+   "drone_train_0037",
+   "drone_train_0039"
+  ],
+  "drone_train_0022": [
+   "drone_train_0021",
+   "drone_train_0022"
+  ]
+ }
+}

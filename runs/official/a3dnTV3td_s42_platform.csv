@@ -1,0 +1,6 @@
+Platform,ATE20 (m),AVE (m/s),RTE (m),n_traj,n_win,share of score
+Wheeled / Car,0.33014,0.06671,0.247,18,10584,9.0%
+Handheld / Human,0.65373,0.05612,0.32154,10,11264,12.1%
+Legged / Quadruped,0.3469,0.0762,0.3494,16,6697,9.9%
+Aerial / Drone,1.25817,0.71133,3.1941,45,2099,69.0%
+Average,0.64723,0.22759,1.02801,89,30644,100.0%
