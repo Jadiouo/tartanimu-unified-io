@@ -28,11 +28,12 @@ Full table: [`evidence/private_leaderboard.csv`](evidence/private_leaderboard.cs
 
 ## 2. Official scoring service (all 89 test sequences)
 
+For reference, the organisers' released 4-head baseline scores 0.937 on the public leaderboard when its best head is forced for every platform (an all-zero submission scores 1.054 there); it has no mechanism to infer the platform on the anonymised test, which is why this work trains one unified model instead.
+
 The number I designed against. The scoring service returns per-platform and per-sequence errors, not only a total, so it is the honest estimator of the final standing; 33 queries were spent over the 13 days and every one is in [`../runs/official/`](../runs/official/).
 
 | Model | Score ↓ | car ATE | human ATE | dog ATE | drone ATE / AVE | sprint tail Σ AVE |
 |---|---|---|---|---|---|---|
-| official baseline (4 heads, best forced head) | — | | | | | public 0.937 |
 | v6: dense-window CNN + biGRU, SSL trunk, time dilation | 0.2702 | 0.337 | 0.603 | 0.357 | 1.274 / 0.723 | 15.1 |
 | + S-fast (drag-consistent scaling of the racing family) | 0.2658 | 0.313 | 0.639 | 0.357 | 1.244 / 0.703 | 12.7 |
 | **+ learned inertial channels + gated recursion — delivered, `a3v20_s42`** | **0.2588** | 0.341 | 0.582 | 0.345 | 1.200 / 0.675 | 11.8 |
