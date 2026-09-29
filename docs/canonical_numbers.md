@@ -6,7 +6,8 @@ Every number and wording follows this file; change here first, then sync the oth
 
 | Item | Value |
 |---|---|
-| Team (Kaggle) | `Lexxxxx` |
+| Team (Kaggle) | `Lexxxxx` (single author) |
+| **Final standing (published 2026-09-28)** | **20th / 131 teams**, private leaderboard **0.19912**; public leaderboard 18th, 0.32695 |
 | Main submission (Kaggle final #1, HF, report subject) | `a3v20_s42`, CSV `sub_test_a3v20_s42.csv`, md5 `545d7cddc859a16db045f872251be03c` |
 | Official full test (scoring service) | **Score 0.25878**, macro ATE20 0.61704, macro AVE 0.22017, RTE 0.95368 |
 | Official per-platform ATE20 / AVE / RTE | car 0.34105 / 0.0703 / 0.26476; human 0.58245 / 0.05459 / 0.30122; quadruped 0.3451 / 0.08106 / 0.3749; drone 1.19955 / 0.67472 / 2.87383 |
