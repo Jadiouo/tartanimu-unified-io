@@ -4,7 +4,9 @@
 
 Raw 6-axis IMU in, body-frame velocity out, for a car, a quadruped, a drone and a handheld rig — **one network, one set of weights, no platform label at inference**. Official scoring service over all 89 test sequences: **TartanIMU Score 0.25878** (ATE₂₀ 0.617 m, AVE 0.220 m/s). Kaggle team `Lexxxxx`.
 
-Challenge: [superodometry.com/imuchallenge](https://superodometry.com/imuchallenge/) (CMU AirLab / Super Odometry Group, official benchmark of the IROS 2026 workshop *Beyond Exteroception*) · [Kaggle competition](https://www.kaggle.com/competitions/tartan-imu-challenge-iros2026) · [final standing](https://www.kaggle.com/competitions/tartan-imu-challenge-iros2026/leaderboard?search=Lexxxxx) · [my Kaggle profile](https://www.kaggle.com/lexhoooo/competitions)
+**Challenge** [superodometry.com/imuchallenge](https://superodometry.com/imuchallenge/) (CMU AirLab / Super Odometry Group, official benchmark of the IROS 2026 workshop *Beyond Exteroception*) · [Kaggle competition](https://www.kaggle.com/competitions/tartan-imu-challenge-iros2026) · [final standing](https://www.kaggle.com/competitions/tartan-imu-challenge-iros2026/leaderboard?search=Lexxxxx) · [my Kaggle profile](https://www.kaggle.com/lexhoooo/competitions)
+
+**Model releases** 🤗 [LexHo/tartanimu-a3v20](https://huggingface.co/LexHo/tartanimu-a3v20) — the delivered entry, frozen weights + the exact scored `submission.csv` + a CPU-reproducible `predict.py` · 🤗 [LexHo/tartanimu-a3v21](https://huggingface.co/LexHo/tartanimu-a3v21) — the second entry (variant B) · [technical report (PDF)](report/technical_report.pdf)
 
 <p align="center"><img src="figures/pipeline.png" width="760" alt="pipeline"></p>
 
@@ -17,7 +19,7 @@ This repository is the complete, curated record of the work: the model and train
 | **Model** | 2.17 M parameters + 78 k in two frozen sub-modules; dilated 1-D ResNet → biGRU over 40 one-second windows → direct head + learned-gain physics recursion |
 | **Scale of work** | ~500 training runs, 33 official scoring queries, 26 Kaggle submissions, ≈ 135 GPU-hours (local + rented 3090 / 5090), 2026-09-08 → 09-21 |
 | **My role** | everything: problem analysis, architecture, training, evaluation design, cloud orchestration, delivery package, technical report |
-| **Deliverables** | [frozen weights + exact scored predictions](https://huggingface.co/LexHo/tartanimu-a3v20) · [technical report (PDF)](report/technical_report.pdf) · this code |
+| **Deliverables** | two Hugging Face model releases ([a3v20](https://huggingface.co/LexHo/tartanimu-a3v20), [a3v21](https://huggingface.co/LexHo/tartanimu-a3v21)), each self-contained and CPU-reproducible in 85 s · [technical report (PDF)](report/technical_report.pdf) · this code |
 
 ---
 
@@ -34,7 +36,14 @@ This repository is the complete, curated record of the work: the model and train
 
 Score = 0.6·AVE/0.7356 + 0.4·ATE₂₀/3.1160, macro-averaged over the four platforms; an all-zero submission scores 1.000. Seed range of the delivered recipe 0.2588 / 0.2693 (seeds 42 / 43, seed 42 designated before any seed was scored). All 33 official queries with per-platform and per-sequence breakdown: [`runs/official/`](runs/official/).
 
-The frozen delivery package re-executes on CPU in ~85 s in an isolated environment and reproduces the scored `submission.csv` to 2 × 10⁻³ m/s.
+### Model releases
+
+| Repository | Entry | Official score | Contents |
+|---|---|---|---|
+| 🤗 [**LexHo/tartanimu-a3v20**](https://huggingface.co/LexHo/tartanimu-a3v20) | delivered | **0.25878** | frozen checkpoint (main network + both sub-modules in one file), `predict.py`, pinned requirements, the exact scored `submission.csv`, `SHA256SUMS`, compliance declaration |
+| 🤗 [**LexHo/tartanimu-a3v21**](https://huggingface.co/LexHo/tartanimu-a3v21) | second | 0.26306 | same layout, variant B weights |
+
+Each release re-executes from its frozen weights on CPU in ~85 s in an isolated environment (`env -i`, sockets blocked, empty cache) and reproduces its scored `submission.csv` to a maximum component difference of 1.9 × 10⁻³ m/s — the check was run again after re-downloading the published repository.
 
 ## What is in the model
 
