@@ -1,6 +1,8 @@
 # 一個小模型，只用 IMU 就能估計四種機器人的速度
 
-**[English](README.md) | [繁體中文](README.zh-TW.md)** · **一頁摘要（PDF）：[English](portfolio/onepager_en.pdf) | [中文](portfolio/onepager_zh.pdf)** · **網頁版：[jadiouo.github.io/tartanimu-unified-io](https://jadiouo.github.io/tartanimu-unified-io/)**
+> ### 🌐 作品集網頁：**[jadiouo.github.io/tartanimu-unified-io](https://jadiouo.github.io/tartanimu-unified-io/)**
+
+**[English](README.md) | [繁體中文](README.zh-TW.md)** · **一頁摘要（PDF）：[English](portfolio/onepager_en.pdf) | [中文](portfolio/onepager_zh.pdf)**
 
 **一段話說完。** IMU 是手機和機器人裡常見的小型動作感測器（加速度計加陀螺儀）。這個專案只靠它來估計機器人跑多快，對象是車、四足機器狗、無人機、手持裝置四種載具，而且要求**同一組訓練好的權重處理全部四種，推論時也不告訴模型現在是哪一種**。難處在於同樣的感測器讀數在不同載具上代表不同的運動，無人機的高速衝刺和狗慢慢走路的訊號完全不像。
 

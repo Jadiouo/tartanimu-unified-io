@@ -1,6 +1,8 @@
 # One small model that estimates the speed of four kinds of robots from an IMU alone
 
-**[English](README.md) | [繁體中文](README.zh-TW.md)** · **One-page summary (PDF): [English](portfolio/onepager_en.pdf) | [中文](portfolio/onepager_zh.pdf)** · **Web page: [jadiouo.github.io/tartanimu-unified-io](https://jadiouo.github.io/tartanimu-unified-io/)**
+> ### 🌐 Portfolio web page: **[jadiouo.github.io/tartanimu-unified-io](https://jadiouo.github.io/tartanimu-unified-io/)**
+
+**[English](README.md) | [繁體中文](README.zh-TW.md)** · **One-page summary (PDF): [English](portfolio/onepager_en.pdf) | [中文](portfolio/onepager_zh.pdf)**
 
 **In one paragraph.** An IMU is the small motion sensor (accelerometer plus gyroscope) found in phones and robots. This project estimates how fast a robot is moving using that sensor alone, for a car, a four-legged robot dog, a drone and a handheld rig, with **one set of trained weights and no label telling the model which robot it is looking at**. It is hard because the same sensor reading means different motion on different bodies, and a drone's fast sprint looks nothing like a walking dog.
 
