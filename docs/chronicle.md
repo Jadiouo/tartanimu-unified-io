@@ -1,6 +1,6 @@
 # TartanIMU Challenge — chronicle (2026-09-08 → 09-21)
 
-A day-by-day record of the 13 days: what was tried, what it scored on which ruler, what was decided, and what the artefacts are. Times are Taipei (GMT+8). Every number carries a tag that can be traced to `runs/official/` (official scoring service) or to the training run of that name.
+A day-by-day record of the two weeks (joined 2026-09-08, delivered 09-21): what was tried, what it scored on which ruler, what was decided, and what the artefacts are. Times are Taipei (GMT+8). Every number carries a tag that can be traced to `runs/official/` (official scoring service) or to the training run of that name.
 
 ---
 
@@ -10,7 +10,7 @@ A day-by-day record of the 13 days: what was tried, what it scored on which rule
 | Ruler | Definition | Population it measures | Noise | In use from |
 |---|---|---|---|---|
 | **val** | released val (80 recordings) scored with the official scorer, train-only models | drone group D + car/dog/human (in-distribution) | seed sd ≈ 0.002 | 9/8 |
-| **public LB** | Kaggle 30 % | skewed to fast drone flights | — | 9/8 |
+| **public LB** | Kaggle public half (41 of 89 test sequences) | skewed to fast drone flights | — | 9/8 |
 | **official full test** (scoring service) | 89 test recordings, per-platform ATE20/AVE/RTE + per-sequence | everything (drone 68–72 % of the score) | same-recipe seed sd ≈ 0.005 | 9/12 |
 | **hold-out** → **fold A** (`runs/folds/stress_fold.json`, 26 recordings) | 12 original hold-outs + 5 high-rotation + 7 fast + 2 middle, both IMUs of a flight held out together; no training window above 8 m/s | group C + pure extrapolation | sd 0.02–0.04, machine-to-machine 0.06 | 9/17 |
 | **sprint folds** (`stress_fold_sprint*.json`, folds 1/2/3) | hold out one outdoor sprint pair (0037/39, 0038/40, 0041/42) plus the aggressive pair 0021/22; the other sprints stay in training | groups A/B (the tail) | sd ≈ 0.3 (two sequences) | 9/18 night / 9/20 night |
@@ -31,8 +31,8 @@ A day-by-day record of the 13 days: what was tried, what it scored on which rule
 | Delivered | **a3v20_s42**: official **0.25878** (ATE20 0.61704 / AVE 0.22017), public 0.32793; HF `LexHo/tartanimu-a3v20` |
 | Second entry | a3v21_s42: official 0.26306, public 0.32695; HF `LexHo/tartanimu-a3v21` |
 | Start → end | val 1.015 (all-zero) → 0.1746 (tv_film); public 1.054 → 0.3270; official 0.3057 (first query, 9/12) → 0.2588 |
-| Competitors | AxisTilted2 official 0.2156, BShankar 0.2379, xunden 0.2585 (single pass); 84 % of our gap is drone AVE, four fifths of it on the 41 non-sprint drone sequences |
-| Official queries / Kaggle submissions / training runs | 33 / 26 / ≈ 500+ (local GPU + Kaggle T4 + cloud 3090/4090/5090, ≈ 90 GPU-h) |
+| Competitors | AxisTilted2 official 0.2156, BShankar 0.2379, xunden 0.2585 (single pass); 84 % of our gap is drone AVE, about 61 % of it on the 41 non-sprint drone sequences |
+| Official queries / Kaggle submissions / training runs | 33 / 26 / about 500 (local GPU + Kaggle T4 + cloud 3090/4090/5090; failed and diagnostic runs included; no GPU-hour figure, run-level timing was not recorded) |
 
 **Five turning points**
 1. 9/8: the official 4-head baseline is a dead end on the anonymised test → train one unified model; val 0.232 the same night (dense windowing + cross-window GRU).
@@ -136,8 +136,8 @@ A day-by-day record of the 13 days: what was tried, what it scored on which rule
 - HF: `LexHo/tartanimu-a3v20` (public, commit 2426e014; after re-download, isolated dry-run 85 s / 2.0 GB / max diff 1.9e-3), `LexHo/tartanimu-a3v21` (1b0d0829; 69 s / 1.4 GB / 1.6e-3). Forms submitted; technical report v5.1 (eight investigations) attached.
 
 ### 9/28 (Sun) final standings
-- The private leaderboard was published: **20th of 131 teams, 0.19912** (`a3v20_s42`, the delivered model). Public leaderboard 18th, 0.32695.
-- The private half ranks fourteen of my submissions between 0.1932 and 0.2094 — seven ranks. The best of them on that half would have been 18th (`a3dnTV3td`, the day-7 model); on the full 89-sequence test, which is the better estimator, the delivered model beats both other finalists. The pre-registered rule picked correctly against the estimator it was designed for.
+- The private leaderboard was published: **20th of 131 teams, 0.19912** (`a3v20_s42`, the delivered model). Public column 0.32695 (best public over all my submissions, from a3v21; the delivered a3v20 scored 0.32793 public).
+- The private half ranks fourteen of my submissions between 0.1932 and 0.2094 — seven ranks. The best of them on that half would have been 18th (`a3dnTV3td`, the day-7 model); on the full 89-sequence test, which is the better estimator, the delivered model beats both other finalists. On that estimator the rule's pick ranked first of the three finalists, within seed noise.
 - No certificate is issued: the competition is a Kaggle Community competition (reward "Kudos", no medals or points), and the organisers' only announced recognition is an invitation to the *IMU Foundation Model* white paper for the top 10. Verification links and exports: `docs/results.md` §5 and `docs/evidence/`.
 
 ---
