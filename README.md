@@ -1,6 +1,6 @@
 # One small model that estimates the speed of four kinds of robots from an IMU alone
 
-**[English](README.md) | [繁體中文](README.zh-TW.md)** · **One-page summary (PDF): [English](portfolio/onepager_en.pdf) | [中文](portfolio/onepager_zh.pdf)**
+**[English](README.md) | [繁體中文](README.zh-TW.md)** · **One-page summary (PDF): [English](portfolio/onepager_en.pdf) | [中文](portfolio/onepager_zh.pdf)** · **Web page: [jadiouo.github.io/tartanimu-unified-io](https://jadiouo.github.io/tartanimu-unified-io/)**
 
 **In one paragraph.** An IMU is the small motion sensor (accelerometer plus gyroscope) found in phones and robots. This project estimates how fast a robot is moving using that sensor alone, for a car, a four-legged robot dog, a drone and a handheld rig, with **one set of trained weights and no label telling the model which robot it is looking at**. It is hard because the same sensor reading means different motion on different bodies, and a drone's fast sprint looks nothing like a walking dog.
 
@@ -22,7 +22,7 @@
 
 Author: Hao-Ting Ho (何浩廷), Department of Electrical Engineering, Tunghai University · lexho2005@gmail.com
 
-<p align="center"><img src="figures/pipeline.png" width="760" alt="pipeline"></p>
+<p align="center"><img src="figures/overview_en.png" width="900" alt="Plain-language overview: raw IMU signal, automatic sensor calibration, gravity direction, a neural network reading 40 seconds of context, and one speed estimate per second; below, a dashed box for the unranked post-competition steps (public post-processing, ground-robot correction, per-window uncertainty smoothing)"></p>
 
 This repository is the curated record of the work: model and training code, the evaluation setups I built, cloud automation, the technical report submitted to the organizers, and a day-by-day account of what was measured, what was decided on it, and where the outcome differed from what I expected.
 
@@ -69,6 +69,10 @@ Each release re-executes from its frozen weights on CPU in about 85 s in an isol
 - **Inference**: deterministic, offline within one trajectory, no platform label, no ensembling, no test-time averaging, no adaptation, no external data. Overlapping chunks of the model's own predictions are averaged (stride K/2); that is the only averaging.
 
 ## Method: how I tried not to fool myself
+Technical version of the pipeline:
+
+<p align="center"><img src="figures/pipeline.png" width="760" alt="pipeline"></p>
+
 
 - **Held-out data.** I set aside recordings that are excluded from all three training stages (the self-supervised pre-training did see their IMU signal, so this is not strictly clean), then used them as the exam. One analysis was voided when the validation set turned out to be something the model had already trained on.
 - **Pass/fail rule before submission.** Before each late submission or check I wrote down what would count as success (12 files in the post-competition phase). They are archived by me with no third-party timestamp, and often share a code snapshot (commit) with the result, so I do not claim external verifiability.

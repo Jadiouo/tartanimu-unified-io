@@ -1,6 +1,6 @@
 # 一個小模型，只用 IMU 就能估計四種機器人的速度
 
-**[English](README.md) | [繁體中文](README.zh-TW.md)** · **一頁摘要（PDF）：[English](portfolio/onepager_en.pdf) | [中文](portfolio/onepager_zh.pdf)**
+**[English](README.md) | [繁體中文](README.zh-TW.md)** · **一頁摘要（PDF）：[English](portfolio/onepager_en.pdf) | [中文](portfolio/onepager_zh.pdf)** · **網頁版：[jadiouo.github.io/tartanimu-unified-io](https://jadiouo.github.io/tartanimu-unified-io/)**
 
 **一段話說完。** IMU 是手機和機器人裡常見的小型動作感測器（加速度計加陀螺儀）。這個專案只靠它來估計機器人跑多快，對象是車、四足機器狗、無人機、手持裝置四種載具，而且要求**同一組訓練好的權重處理全部四種，推論時也不告訴模型現在是哪一種**。難處在於同樣的感測器讀數在不同載具上代表不同的運動，無人機的高速衝刺和狗慢慢走路的訊號完全不像。
 
@@ -22,7 +22,7 @@
 
 作者：何浩廷（Hao-Ting Ho），東海大學電機工程學系 · lexho2005@gmail.com
 
-<p align="center"><img src="figures/pipeline.png" width="760" alt="pipeline"></p>
+<p align="center"><img src="figures/overview_zh.png" width="900" alt="白話版流程圖：原始 IMU 訊號、自動校正感測器、估計重力方向、神經網路讀 40 秒上下文、每秒輸出一筆速度；下方虛線框為不計名次的賽後延伸（接上公開後處理方法、地面機器人修正、逐窗不確定度平滑）"></p>
 
 這個 repo 是整件工作的精選紀錄：模型與訓練程式、我自己建的評估方法、雲端自動化、交給主辦方的技術報告，以及逐日紀錄：量了什麼、據此做了什麼決定、結果與預期哪裡不同。
 
@@ -56,6 +56,10 @@
 兩個 Hugging Face repo（比賽最終模型與第二提交），內容含凍結權重、`predict.py`、實際計分的 `submission.csv`、`SHA256SUMS`、合規聲明。在隔離環境（封鎖網路、空 cache）於 CPU 約 85 秒即可重現計分檔，最大分量差 1.9×10⁻³ m/s；重新下載後又驗過一次。
 
 ## 方法：我怎麼避免騙自己
+技術版流程圖：
+
+<p align="center"><img src="figures/pipeline.png" width="760" alt="pipeline"></p>
+
 
 - **留出資料。** 先拿出一部分錄製，三個訓練階段都不讓模型看（自監督預訓練見過它們的感測器訊號，所以不是最嚴格），當作考題；有一輪分析在發現驗證集其實是模型訓練過的資料之後整輪作廢。
 - **提交前先寫判準。** 賽後每次提交或檢驗之前，先寫下怎樣才算有效（共 12 份）。這些是我自己存檔、沒有第三方時間戳，也常與結果同一次版本紀錄，所以我不宣稱外部可驗證。

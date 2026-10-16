@@ -1,0 +1,218 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="何浩廷 Hao-Ting Ho — TartanIMU 作品集：只用 IMU 估計四種機器人的速度。">
+<style>:root{color-scheme:light;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0;font:14px/1.5 system-ui,-apple-system,"Segoe UI",sans-serif}img{max-width:100%}[hidden]{display:none!important}</style>
+</head>
+<body>
+<title>TartanIMU 作品集</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<style>
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Noto+Sans+TC:wght@400;500;700&family=Space+Grotesk:wght@500;700&display=swap');
+:root{
+  --bg:#eef2f3; --surface:#ffffff; --ink:#0e1a22; --muted:#4a5c67; --line:#c9d4d9;
+  --accent:#0a7384; --accent-ink:#ffffff; --warm:#b45f06; --bar-pub:#7da7b2; --bar-priv:#0a7384; --grid:#d5dee2;
+  --dark-bg:#12202e; --dark-ink:#f1f4f5; --dark-muted:#b6c4cc; --dark-accent:#e0a36f;
+  --head:'Space Grotesk','Noto Sans TC',sans-serif; --body:'Noto Sans TC','Space Grotesk',system-ui,sans-serif; --mono:'IBM Plex Mono',ui-monospace,monospace;
+}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){
+  --bg:#0b141a; --surface:#121f27; --ink:#e4edf0; --muted:#9fb3bd; --line:#27393f;
+  --accent:#4fc3d6; --accent-ink:#06171c; --warm:#f0a04b; --bar-pub:#3d6c78; --bar-priv:#4fc3d6; --grid:#22343b;
+  --dark-bg:#06101a; --dark-ink:#e4edf0; --dark-muted:#9fb3bd; --dark-accent:#f0a04b; color-scheme:dark; } }
+:root[data-theme="dark"]{
+  --bg:#0b141a; --surface:#121f27; --ink:#e4edf0; --muted:#9fb3bd; --line:#27393f;
+  --accent:#4fc3d6; --accent-ink:#06171c; --warm:#f0a04b; --bar-pub:#3d6c78; --bar-priv:#4fc3d6; --grid:#22343b;
+  --dark-bg:#06101a; --dark-ink:#e4edf0; --dark-muted:#9fb3bd; --dark-accent:#f0a04b; color-scheme:dark; }
+*{box-sizing:border-box}
+html{background:var(--bg)}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--body);line-height:1.75;font-size:16px;overflow-x:hidden}
+a{color:var(--accent);text-underline-offset:3px}
+.wrap{max-width:920px;margin:0 auto;padding-block:20px 64px;padding-left:max(16px, env(safe-area-inset-left,0px));padding-right:max(16px, env(safe-area-inset-right,0px))}
+[data-lang="zh"] .en{display:none} [data-lang="en"] .zh{display:none}
+.bar{display:flex;justify-content:space-between;align-items:center;gap:12px;font-family:var(--mono);font-size:12px;color:var(--muted);border-bottom:1px solid var(--line);padding-bottom:10px}
+.bar button{font:inherit;color:var(--ink);background:none;border:1px solid var(--line);padding:4px 10px;cursor:pointer;border-radius:2px}
+.bar button[aria-pressed="true"]{background:var(--accent);color:var(--accent-ink);border-color:var(--accent)}
+.hero{position:relative;padding-block:36px 28px}
+.hero svg.trace{position:absolute;right:0;top:0;width:34%;max-width:300px;opacity:.7;pointer-events:none}
+.trace path{fill:none;stroke:var(--accent);stroke-width:1.5}
+.trace path.b{stroke:var(--warm);stroke-dasharray:3 4;stroke-width:1.2}
+.kicker{font-family:var(--mono);font-size:12px;letter-spacing:.08em;color:var(--warm);margin:0 0 8px}
+h1{font-family:var(--head);font-size:clamp(30px,6vw,48px);line-height:1.15;margin:0 0 10px;position:relative}
+.sub{font-size:18px;max-width:34em;margin:0 0 4px;position:relative}
+.name{font-family:var(--mono);font-size:13px;color:var(--muted);position:relative}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));margin-top:26px;border-top:2px solid var(--ink);position:relative;background:var(--bg)}
+.stat{padding:14px 14px 14px 0;border-bottom:1px solid var(--line)}
+.stat b{display:block;font-family:var(--head);font-size:34px;line-height:1.1}
+.stat span{font-size:13px;color:var(--muted);display:block;margin-top:4px;line-height:1.5}
+.stat small{font-size:16px;color:var(--muted)}
+section{padding-block:30px 6px;border-top:1px solid var(--line);margin-top:22px}
+h2{font-family:var(--head);font-size:22px;margin:0 0 10px}
+h2 i{font-family:var(--mono);font-style:normal;color:var(--warm);font-size:13px;margin-right:10px;font-weight:500}
+p{margin:0 0 12px;max-width:44em}
+ul{margin:0 0 12px;padding-left:1.2em;max-width:44em} li{margin-bottom:6px}
+.num{font-family:var(--mono);font-size:.94em}
+.note{border-left:3px solid var(--warm);padding:4px 0 4px 12px;color:var(--muted);font-size:14px;max-width:44em}
+.dark{background:var(--dark-bg);color:var(--dark-ink);padding:18px 18px 8px;margin:18px 0;max-width:44em}
+.dark p{margin:0 0 10px}
+.dark .hl{color:var(--dark-accent);font-family:var(--mono);font-size:13px;letter-spacing:.06em}
+.dark .mu{color:var(--dark-muted);font-size:14px}
+.fig{margin:18px 0;background:var(--surface);border:1px solid var(--line);padding:14px}
+.fig figcaption{font-size:13px;color:var(--muted);margin-top:8px;line-height:1.6}
+.fig .flow{font-family:var(--mono);font-size:13px;line-height:1.7;text-align:left;overflow-wrap:anywhere}.fig .flow div+div{margin-top:10px;padding-top:10px;border-top:1px dashed var(--line);color:var(--muted)}.fig .flow b{color:var(--warm);font-weight:500}
+.chart{display:grid;gap:16px}
+.chart .gt{font-size:14px;font-weight:700;margin-bottom:4px}
+.chart .row{display:grid;grid-template-columns:4.2em 1fr 4.6em;align-items:center;gap:8px;font-family:var(--mono);font-size:12px;margin-bottom:4px}
+.chart .track{display:block;height:16px;background:var(--grid)}
+.chart .track i{display:block;height:100%}
+.chart .row b{font-weight:500;text-align:right}
+.chart .legend{font-family:var(--mono);font-size:12px;color:var(--muted)}
+table{border-collapse:collapse;width:100%;font-size:14px;max-width:44em}
+th,td{text-align:left;padding:6px 10px 6px 0;border-bottom:1px solid var(--line);vertical-align:top}
+th{font-family:var(--mono);font-size:12px;color:var(--muted);font-weight:500}
+.links{display:flex;flex-wrap:wrap;gap:8px 18px;font-family:var(--mono);font-size:14px}
+footer{margin-top:40px;font-size:12px;color:var(--muted);font-family:var(--mono)}
+@media (max-width:560px){.hero svg.trace{display:none}.stat b{font-size:28px}}
+</style>
+<div class="wrap" id="root" data-lang="zh">
+<div class="bar"><span>IMU · 200 Hz · 6-axis · m/s</span>
+<span><button type="button" id="bzh" aria-pressed="true">中文</button> <button type="button" id="ben" aria-pressed="false">EN</button></span></div>
+
+<header class="hero">
+<svg class="trace" viewBox="0 0 420 150" aria-hidden="true"><path d="M0 120 C40 120 50 40 100 50 S160 130 210 90 S290 10 340 40 S400 100 420 70"/><path class="b" d="M0 128 C45 126 52 52 100 60 S165 128 212 100 S292 24 340 52 S402 104 420 84"/></svg>
+<p class="kicker">IROS 2026 · TARTANIMU CHALLENGE</p>
+<h1><span class="zh">只靠 IMU 估計速度，<br>一組權重通吃四種載具</span><span class="en">Velocity from an IMU alone,<br>one set of weights, four robots</span></h1>
+<p class="sub"><span class="zh">Kaggle 私榜第 20 名（131 隊），單人隊伍；用 2.17M 參數的小模型，另一支強隊的網路是 43.7M。</span><span class="en">20th of 131 on the Kaggle private leaderboard, solo entry, with a 2.17M-parameter model; one strong rival network is 43.7M.</span></p>
+<p class="name">Hao-Ting Ho · <span class="zh">何浩廷 · 東海大學電機系</span><span class="en">Dept. of Electrical Engineering, Tunghai University</span> · lexho2005@gmail.com</p>
+<div class="stats">
+<div class="stat"><b>20 / 131</b><span><span class="zh">Kaggle 私榜名次（分數 0.19912，越低越好）；主辦方後續列為前十隊伍之一，官方最終名次尚未公布</span><span class="en">Kaggle private leaderboard rank (score 0.19912, lower is better); the organizers later listed us among the top 10; the official final ranking is not yet announced</span></span></div>
+<div class="stat"><b>2.17M <small>vs 43.7M</small></b><span><span class="zh">模型大小（參數量），約 1/20</span><span class="en">model size (parameters), about 1/20</span></span></div>
+<div class="stat"><b>0.25878</b><span><span class="zh">用全部測試資料算的官方分數（越低越好；全部預測為零 = 1.0；主辦方基線 0.538）</span><span class="en">official full-test score (lower is better; all-zero = 1.0; organizer baseline 0.538)</span></span></div>
+<div class="stat"><b><span class="zh">研究負責人</span><span class="en">Research lead</span></b><span><span class="zh">方向、取捨、驗證規則、每次提交由我決定；實作由 AI agent 執行</span><span class="en">I set direction, trade-offs, validation rules and every submission; AI agents implemented</span></span></div>
+</div>
+</header>
+
+<section><h2><i>01</i><span class="zh">問題</span><span class="en">The problem</span></h2>
+<p class="zh">車、四足狗、無人機、手持裝置，各自的運動方式完全不同。比賽要求同一組權重處理這四種載具，推論時不知道是哪一種，只給 200 Hz 的六軸 IMU（三軸加速度加三軸角速度），輸出速度。難在：IMU 量到的是加速度，積分起來會越漂越遠；而每種載具的動力學不一樣，例如無人機高速時空氣阻力很大。</p>
+<p class="en">A car, a quadruped, a drone and a handheld rig all move differently. The challenge asks for one set of weights across all four, with no platform label at inference: only 200 Hz six-axis IMU data (3-axis accelerometer and 3-axis gyro) in, velocity out. It is hard because the IMU measures acceleration, which drifts when integrated, and each platform has different dynamics; a fast drone, for example, is dominated by air drag.</p>
+</section>
+
+<section><h2><i>02</i><span class="zh">比賽成績</span><span class="en">Contest result</span></h2>
+<div class="dark">
+<p class="hl zh">名次</p><p class="hl en">RANKING</p>
+<p class="zh">Kaggle 私榜第 20 名（131 隊）；主辦方後續將本隊列為前十隊伍之一（2026-10-09 主辦方來信），官方最終名次尚未公布。</p>
+<p class="en">20th of 131 on the Kaggle private leaderboard; the organizers subsequently listed our team among the top 10 (organizers' e-mail, 2026-10-09); the official final ranking has not been announced.</p>
+<p class="mu zh">受邀加入 IMU Foundation Model 白皮書討論頻道；目前未列為作者，白皮書尚未發表。</p>
+<p class="mu en">Invited to the private working channel for the forthcoming IMU Foundation Model white paper. Not a listed author; the paper is unpublished.</p>
+</div>
+<p class="zh">IROS 2026 TartanIMU Challenge：私榜分數 <span class="num">0.19912</span>，提交的是我們比賽最終的模型（a3v20）。用全部測試資料算的官方分數是 <span class="num">0.25878</span>（越低越好，全部預測為零 = 1.0），主辦方的基線是 <span class="num">0.538</span>。9/8 加入、9/21 交件，約兩週。</p>
+<p class="en">IROS 2026 TartanIMU Challenge: private leaderboard score <span class="num">0.19912</span> with our final competition model (a3v20). The official full-test score is <span class="num">0.25878</span> (lower is better; all-zero = 1.0) against the organizer baseline of <span class="num">0.538</span>. I joined on 8 September and delivered on 21 September, about two weeks later (the contest itself opened earlier).</p>
+<p class="zh">限制：同樣的做法只換隨機種子重訓，另一次是 <span class="num">0.26933</span>；交出去的那次是事先指定的，但剛好落在較好的一側。只換種子，分數就會飄動約 0.0056。</p>
+<p class="en">Caveat: the same recipe retrained with another random seed scores <span class="num">0.26933</span>. The seed I submitted was fixed in advance but landed on the better side; changing only the seed moves the score by about 0.0056.</p>
+</section>
+
+<section><h2><i>03</i><span class="zh">做法</span><span class="en">Approach</span></h2>
+<p class="zh">一個 2.17M 參數的網路：把資料切成 1 秒的窗，用雙向循環網路一次看 40 個窗；前面接兩個小模組先校正感測器偏差與姿態，後面是讓速度在窗與窗之間接力的輸出，接力的力度可以調。訓練前先讓模型玩「遮住一部分輸入再還原」的自監督預訓練。以下是本專案的技術貢獻：</p>
+<p class="en">One 2.17M-parameter network: the data is cut into 1-second windows and a bidirectional recurrent network reads 40 windows at once; two small modules in front correct sensor bias and attitude, and an output behind lets the velocity estimate carry over from window to window, with an adjustable strength. Before training it is pre-trained on a "mask part of the input and reconstruct it" task. Project contributions:</p>
+<ul class="zh">
+<li><b>診斷「模型不讀空氣阻力」。</b>把無人機衝刺序列的加速度放大或縮小，預測幾乎不動（變動小於 0.3 m/s），所以用符合物理的縮放造出更多快飛資料。官方分數 0.2702 → 0.26577，差距小於只換種子的飄動；四條衝刺序列都在 Kaggle 公開榜那一半，對私榜名次沒有貢獻。</li>
+<li><b>先校正、再接力。</b>官方分數 0.26577 → 0.25878；同時量出「接力力度」是取捨：開小有益，開大會讓一般行駛變遲鈍。</li>
+<li><b>時間縮放增強（把紀錄快轉）。</b>0.2837 → 0.2687，但同時把預訓練從 90 分鐘延長到 3 小時，兩者效應分不開；同類做法至少 4 隊獨立用過，不是新穎點。</li>
+<li><b>評估方法：用三把尺量三種不同的資料。</b>以「只換種子就會飄動的幅度」當門檻，擋掉太小的改動。</li>
+</ul>
+<ul class="en">
+<li><b>Diagnosing that the model ignores drag.</b> Scaling a drone sprint's acceleration up or down barely moves the prediction (less than 0.3 m/s), so I built more fast-flight data with physics-consistent scaling. Official score 0.2702 to 0.26577, smaller than run-to-run variation from random seeds; all four sprint sequences sit in the public half of the leaderboard, so this did not help the private rank.</li>
+<li><b>Correct first, then carry over.</b> Official score 0.26577 to 0.25878; I also measured that the carry-over strength is a trade-off: small helps, large makes ordinary driving sluggish.</li>
+<li><b>Time-scaling augmentation (fast-forwarding the recordings).</b> 0.2837 to 0.2687, but pre-training was lengthened from 90 min to 3 h at the same time, so the effects cannot be separated; at least 4 other teams used the same family of augmentation, so it is not novel.</li>
+<li><b>Evaluation method: three rulers for three kinds of data.</b> Run-to-run variation from random seeds is the gate that rejects changes that are too small.</li>
+</ul>
+<figure class="fig">
+<div class="flow"><div class="zh">原始 IMU 200 Hz → 校正偏差與姿態 → 25 個輸入通道 → 卷積網路 → 雙向循環網路 ×2 → 直接預測＋跨窗接力 → 速度 <b>[比賽提交到此為止]</b></div><div class="zh">賽後：thisray 的後處理方法（借用）→ 階段二：地面機器人的修正 → 階段三：逐窗不確定度平滑</div>
+<div class="en">raw IMU 200 Hz → bias and attitude correction → 25 channels → convolutional net → bidirectional recurrent net ×2 → direct estimate + window-to-window carry-over → velocity <b>[contest entry ends here]</b></div><div class="en">after the contest: post-processing method from thisray (borrowed) → Step 2: ground-robot correction → Step 3: per-window uncertainty smoothing</div></div>
+<figcaption><span class="zh">上一行到速度為止是比賽提交；下一行是賽後延伸，thisray 的後處理方法為借用，階段二、三為本專案新增。</span><span class="en">The top line ends at the contest entry; the bottom line is the post-contest extension, where the thisray method is borrowed and Steps 2 and 3 were added by this project.</span></figcaption>
+</figure>
+</section>
+
+<section><h2><i>04</i><span class="zh">賽後延伸</span><span class="en">Post-contest extension</span></h2>
+<p class="note"><span class="zh">賽後提交不計名次，也不與上面的比賽成績並列成「進步」。算法不同：比賽成績是私榜（48 條序列）的 0.19912；下圖是賽後補交、Kaggle 回傳的分數。</span><span class="en">Late submissions do not count for rank and are not a "progress line" from the contest score. Different basis: the contest score is the private half (48 sequences) 0.19912; the chart below shows Kaggle-returned scores for post-contest late submissions.</span></p>
+<p class="zh">先借用另一支參賽隊伍 thisray（Ssu-Rui Lee）賽後公開的後處理方法（程式 Apache-2.0；權重 CC-BY-NC-4.0），接到我的網路上，這是階段一（E）；再由本專案加兩步：階段二（F），地面機器人的修正只套一半強度；階段三（G），把「同一段資料從幾個角度預測、預測彼此不一致的程度」當作每個窗的不確定度，接進平滑器（這個點子是我提的）。階段二、三各自先拿出一部分資料不讓模型看、當作考題檢驗，並在上傳前先寫下怎樣才算有效；借來的階段一沒有這層保證。三個階段在 Kaggle 公開榜與私榜（測試資料的兩半）的分數見下圖，換算成官方分數約 0.182、0.179、0.178（近似，誤差約 ±0.0005）。</p>
+<p class="en">First I ported the post-processing method that another team, thisray (Ssu-Rui Lee), released after the challenge (code Apache-2.0, weights CC-BY-NC-4.0) onto my network, giving Step 1. This project then added two steps: Step 2, a half-strength correction for ground robots, and Step 3, where how much several predictions of the same window disagree is used as that window's uncertainty and fed into the smoother (my idea). Steps 2 and 3 were each checked on a held-out set the model never saw, with the pass/fail rule written before submission; the borrowed Step 1 has no such guarantee. Scores on the Kaggle public and private halves of the test data are charted below; converted to the official score they are about 0.182, 0.179, 0.178 (approximate, error about ±0.0005).</p>
+
+<figure class="fig">
+<div class="chart" role="img" aria-label="Public and private scores of Steps 1 to 3">
+<div class="legend"><span class="zh">長條從 0 起算，越短越好 · 賽後補交</span><span class="en">bars start at zero, shorter is better · late submissions</span></div>
+<div><div class="gt"><span class="zh">階段一：接上公開的後處理方法</span><span class="en">Step 1: add a published post-processing method</span></div>
+<div class="row"><span><span class="zh">公開榜</span><span class="en">public</span></span><span class="track"><i style="width:64.8%;background:var(--bar-pub)"></i></span><b>0.22671</b></div>
+<div class="row"><span><span class="zh">私榜</span><span class="en">private</span></span><span class="track"><i style="width:41.1%;background:var(--bar-priv)"></i></span><b>0.14372</b></div></div>
+<div><div class="gt"><span class="zh">階段二：地面機器人的修正</span><span class="en">Step 2: correction for ground robots</span></div>
+<div class="row"><span><span class="zh">公開榜</span><span class="en">public</span></span><span class="track"><i style="width:64.2%;background:var(--bar-pub)"></i></span><b>0.22468</b></div>
+<div class="row"><span><span class="zh">私榜</span><span class="en">private</span></span><span class="track"><i style="width:39.9%;background:var(--bar-priv)"></i></span><b>0.13957</b></div></div>
+<div><div class="gt"><span class="zh">階段三：逐窗不確定度平滑</span><span class="en">Step 3: per-window uncertainty-weighted smoothing</span></div>
+<div class="row"><span><span class="zh">公開榜</span><span class="en">public</span></span><span class="track"><i style="width:63.8%;background:var(--bar-pub)"></i></span><b>0.22342</b></div>
+<div class="row"><span><span class="zh">私榜</span><span class="en">private</span></span><span class="track"><i style="width:39.7%;background:var(--bar-priv)"></i></span><b>0.13903</b></div></div>
+</div>
+<figcaption><span class="zh">公開榜 41 條序列，私榜 48 條。比例如實：階段之間的差距很小。階段一有兩個版本，後一版的私榜反而比前一版差 0.0027（兩版都上傳後取較好者，帶一個選擇位元）；階段二、三兩邊皆較前一階段低。階段二的一半強度是看過 27 條留出錄製的結果才選的，三次驗證用同一批，不能說已在新場次證明有效。</span><span class="en">Public has 41 sequences, private 48. Proportions are honest: step-to-step differences are small. Step 1 had two variants and the later one scored 0.0027 worse on private (the better of the two was kept, one extra pick between two options); Steps 2 and 3 are lower than the previous step on both halves. The half strength in Step 2 was chosen after seeing results on 27 held-out recordings, and all three checks reuse that set, so it is not shown to hold on new sessions.</span></figcaption>
+</figure>
+
+<ul class="zh">
+<li>地面機器人的修正，相對完整的後處理：分數 −5.74%、−6.12%、−5.67%（三次訓練，27 條地面留出錄製，95% 區間排除 0；越低越好）。</li>
+<li>完整的後處理對無人機留出錄製的速度誤差 −49.0%，對車子的速度誤差 +14.6%：他人的修正對無人機很有效，對地面載具幾乎沒有淨效果。</li>
+<li>接上同一個公開方法時，我的階段一約 0.182，thisray 公布 0.188（其報告，我未重驗），差距小於只換種子的飄動，不能說誰較好。</li>
+</ul>
+<ul class="en">
+<li>Ground-robot correction vs the full post-processing (score): −5.74%, −6.12%, −5.67% (three trainings, 27 held-out ground recordings, 95% intervals exclude 0; lower is better).</li>
+<li>The full post-processing cuts velocity error on the drone held-out set by 49.0% but raises it on cars by 14.6%: the borrowed correction is very effective on drones and nets almost nothing on ground platforms.</li>
+<li>With the same published method, my Step 1 is about 0.182 and thisray reports 0.188 (their report, not re-verified). The gap is smaller than run-to-run variation from random seeds; neither is better.</li>
+</ul>
+</section>
+
+<section><h2><i>05</i><span class="zh">方法論</span><span class="en">Method</span></h2>
+<table>
+<tr><th><span class="zh">做法</span><span class="en">Practice</span></th><th><span class="zh">實例</span><span class="en">Example</span></th></tr>
+<tr><td><span class="zh">留出考題資料</span><span class="en">Held-out set</span></td><td><span class="zh">先拿出 39 條地面與無人機錄製，三個訓練階段都不讓模型看（自監督預訓練見過它們的感測器資料，所以不是最嚴格）。</span><span class="en">39 recordings kept out of all three training stages (the self-supervised pre-training saw their sensor data, so this is not strict).</span></td></tr>
+<tr><td><span class="zh">上傳前寫判準</span><span class="en">Rule before results</span></td><td><span class="zh">每次上傳前先寫下怎樣才算有效，共 12 份。限制：自行存檔、無第三方時間戳，部分與結果在同一次版本紀錄。</span><span class="en">12 documents, each writing down the pass/fail rule before looking at results. Limit: self-archived, no third-party timestamp, and some share a code snapshot (commit) with their results.</span></td></tr>
+<tr><td><span class="zh">另一模型重算</span><span class="en">Independent recompute</span></td><td><span class="zh">另一個 AI 模型（Codex）重算地面留出分析，與原數字差小於 1e-6；也有專門挑錯的審查。</span><span class="en">A different AI model (Codex) recomputed the ground analysis; difference below 1e-6. A separate adversarial review also attacked the results.</span></td></tr>
+<tr><td><span class="zh">換種子重做</span><span class="en">Repeat with other seeds</span></td><td><span class="zh">地面修正在兩次不同的隨機種子重訓中，改善都重現。</span><span class="en">The ground correction's improvement reproduced in two retrainings with different random seeds.</span></td></tr>
+<tr><td><span class="zh">負結果照記</span><span class="en">Negative results kept</span></td><td><span class="zh">多對齊平均（同一段資料換幾種對齊方式預測再取平均）不通過；拿掉車子那一段不顯著；用網路預測不確定度不如簡單的離散度、不提交；地面新增的四個子模型無一通過。</span><span class="en">Multi-alignment averaging failed; dropping the car segment was not significant; a network-predicted uncertainty lost to the simple disagreement measure and was not submitted; none of four new ground sub-models passed.</span></td></tr>
+<tr><td><span class="zh">作廢自己的結論</span><span class="en">Retracting my own result</span></td><td><span class="zh">發現比賽模型對驗證資料來說是「看過答案」的，該輪結果不當證據。</span><span class="en">Found that the competition model had seen the validation data in training, and discarded that round as evidence.</span></td></tr>
+</table>
+<p class="note"><span class="zh">揭露：賽後至少 6 次補交（階段一到三的各版本）用 Kaggle 回傳分數做取捨；比賽中用官方計分服務查詢 33 次；賽後另有約 89 次逐序列探針提交（每次只改一條序列），用來還原公開榜 41 條／私榜 48 條的分組。測試標籤從未使用，探針量到的真值也沒有拿來校正輸出。</span><span class="en">Disclosure: at least 6 post-contest late submissions (the variants of Steps 1 to 3) used returned scores for choices; 33 official-scorer queries during the contest; after the contest about 89 per-sequence probe submissions (one sequence changed each time) were used to recover the public 41 / private 48 split. Test labels were never used, and the true values the probes revealed were not used to correct outputs.</span></p>
+</section>
+
+<section><h2><i>06</i><span class="zh">我的角色</span><span class="en">My role</span></h2>
+<p class="zh">我是研究負責人：研究方向、取捨、驗證規則與每次提交與否，由我最後決定。實作、實驗執行、程式撰寫與互審由 AI coding agent（Claude Code、Codex）完成。我把「規劃並指揮多個 agent 的研究流程、防止 AI 自己驗證自己」當成一項能力：留出考題資料、上傳前先寫判準、由另一個模型重算、專門挑錯的審查。</p>
+<p class="en">I was research lead: research direction, trade-offs, validation rules and whether each submission went out were my final decisions. Implementation, experiment execution, coding and cross-review were done by AI coding agents (Claude Code, Codex). I treat planning and directing a multi-agent research workflow while preventing AI self-verification as a skill: a held-out set, rules written before submission, recomputation by a different model, and adversarial review.</p>
+<p class="zh">明確是我提出的點子：針對不同載具做不同物理建模（無人機用動力學）；把每個窗的不確定度接進平滑器（就是階段三）；選定試多對齊平均（結果無效）；賽後繼續推分；以及賽後各步驟哪些值得提交的取捨。其餘方法標為「本專案」。</p>
+<p class="en">Ideas that were explicitly mine: platform-specific physics models (dynamics for drones); feeding per-window uncertainty into the smoother (which became Step 3); choosing to try multi-alignment averaging (which did not work); continuing to push after the contest; and the call on which post-contest steps were worth submitting. Everything else is credited to "this project".</p>
+</section>
+
+<section><h2><i>07</i><span class="zh">下一步</span><span class="en">Next step</span></h2>
+<p class="zh">可試的方向大致都試過了；下一步是把模型部署到實體機器人上，讓它成為真的能運作的系統。</p>
+<p class="en">I have tried most of the directions worth trying. The next step is to deploy the model on a physical robot and turn it into a system that actually works.</p>
+</section>
+
+<section><h2><i>08</i><span class="zh">連結與聯絡</span><span class="en">Links and contact</span></h2>
+<div class="links">
+<a href="https://github.com/Jadiouo/tartanimu-unified-io" target="_blank" rel="noopener">GitHub</a>
+<a href="https://huggingface.co/LexHo/tartanimu-a3v20" target="_blank" rel="noopener">Hugging Face</a>
+<a href="https://www.kaggle.com/lexhoooo/competitions" target="_blank" rel="noopener">Kaggle</a>
+<a href="https://superodometry.com/imuchallenge/" target="_blank" rel="noopener">Challenge</a>
+<a href="mailto:lexho2005@gmail.com">lexho2005@gmail.com</a>
+</div>
+<footer><span class="zh">賽後數字為 Kaggle 補交回傳值，不計名次。thisray 的數字取自其技術報告，本專案未重驗。</span><span class="en">Post-contest figures are Kaggle late-submission returns and do not count for rank. thisray figures are from their technical report, not re-verified.</span></footer>
+</section>
+</div>
+<script>
+(function(){
+  var r=document.getElementById('root'),z=document.getElementById('bzh'),e=document.getElementById('ben');
+  function set(l,save){r.setAttribute('data-lang',l);document.documentElement.lang=(l==='zh'?'zh-Hant':'en');
+    z.setAttribute('aria-pressed',l==='zh');e.setAttribute('aria-pressed',l==='en');
+    if(save){try{localStorage.setItem('lang',l);}catch(x){}}}
+  var s='zh';try{s=localStorage.getItem('lang')||'zh';}catch(x){}
+  set(s==='en'?'en':'zh',false);
+  z.onclick=function(){set('zh',true)};e.onclick=function(){set('en',true)};
+})();
+</script>
+</body>
+</html>
