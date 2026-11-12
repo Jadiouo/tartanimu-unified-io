@@ -22,7 +22,7 @@
 
 **Links.** [Challenge page](https://superodometry.com/imuchallenge/) (CMU AirLab / Super Odometry Group; official benchmark of the IROS 2026 workshop *Beyond Exteroception*) · [Kaggle competition](https://www.kaggle.com/competitions/tartan-imu-challenge-iros2026) · [my Kaggle profile (20/131)](https://www.kaggle.com/lexhoooo/competitions) · [final standing, team `Lexxxxx`](https://www.kaggle.com/competitions/tartan-imu-challenge-iros2026/leaderboard?search=Lexxxxx) · 🤗 [LexHo/tartanimu-a3v20](https://huggingface.co/LexHo/tartanimu-a3v20) (final competition model: frozen weights, the exact scored `submission.csv`, CPU-reproducible `predict.py`) · 🤗 [LexHo/tartanimu-a3v21](https://huggingface.co/LexHo/tartanimu-a3v21) (second entry) · [technical report (PDF)](report/technical_report.pdf)
 
-Author: Hao-Ting Ho (何浩廷), Department of Electrical Engineering, Tunghai University · lexho2005@gmail.com
+Author: Hao-Ting Ho (何皓廷), Department of Electrical Engineering, Tunghai University · lexho2005@gmail.com
 
 <p align="center"><img src="figures/overview_en.png" width="900" alt="Plain-language overview: raw IMU signal, automatic sensor calibration, gravity direction, a neural network reading 40 seconds of context, and one speed estimate per second; below, a dashed box for the unranked post-competition steps (public post-processing, ground-robot correction, per-window uncertainty smoothing)"></p>
 

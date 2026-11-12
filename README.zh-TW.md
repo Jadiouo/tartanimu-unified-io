@@ -22,7 +22,7 @@
 
 **連結。** [比賽頁](https://superodometry.com/imuchallenge/)（CMU AirLab／Super Odometry Group，IROS 2026 工作坊 *Beyond Exteroception* 的官方基準）· [Kaggle 比賽](https://www.kaggle.com/competitions/tartan-imu-challenge-iros2026) · [我的 Kaggle 個人檔案（20/131）](https://www.kaggle.com/lexhoooo/competitions) · [最終榜單（隊名 `Lexxxxx`）](https://www.kaggle.com/competitions/tartan-imu-challenge-iros2026/leaderboard?search=Lexxxxx) · 🤗 [LexHo/tartanimu-a3v20](https://huggingface.co/LexHo/tartanimu-a3v20)（比賽最終模型：凍結權重、實際計分的 `submission.csv`、可在 CPU 重現的 `predict.py`）· 🤗 [LexHo/tartanimu-a3v21](https://huggingface.co/LexHo/tartanimu-a3v21)（第二提交）· [技術報告（PDF，英文）](report/technical_report.pdf)
 
-作者：何浩廷（Hao-Ting Ho），東海大學電機工程學系 · lexho2005@gmail.com
+作者：何皓廷（Hao-Ting Ho），東海大學電機工程學系 · lexho2005@gmail.com
 
 <p align="center"><img src="figures/overview_zh.png" width="900" alt="白話版流程圖：原始 IMU 訊號、自動校正感測器、估計重力方向、神經網路讀 40 秒上下文、每秒輸出一筆速度；下方虛線框為不計名次的賽後延伸（接上公開後處理方法、地面機器人修正、逐窗不確定度平滑）"></p>
 
