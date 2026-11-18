@@ -60,7 +60,7 @@ ul{margin:0 0 12px;padding-left:1.2em;max-width:44em} li{margin-bottom:6px}
 .dark .mu{color:var(--dark-muted);font-size:14px}
 .fig{margin:18px 0;background:var(--surface);border:1px solid var(--line);padding:14px}
 .fig figcaption{font-size:13px;color:var(--muted);margin-top:8px;line-height:1.6}
-.fig .flow{font-family:var(--mono);font-size:13px;line-height:1.7;text-align:left;overflow-wrap:anywhere}.fig .flow div+div{margin-top:10px;padding-top:10px;border-top:1px dashed var(--line);color:var(--muted)}.fig .flow b{color:var(--warm);font-weight:500}
+.fig .flow{font-family:var(--mono);font-size:13px;line-height:1.7;text-align:left;overflow-wrap:anywhere}.fig .flow div:nth-of-type(even){margin-top:10px;padding-top:10px;border-top:1px dashed var(--line);color:var(--muted)}.fig .flow b{color:var(--warm);font-weight:500}
 .chart{display:grid;gap:16px}
 .chart .gt{font-size:14px;font-weight:700;margin-bottom:4px}
 .chart .row{display:grid;grid-template-columns:4.2em 1fr 4.6em;align-items:center;gap:8px;font-family:var(--mono);font-size:12px;margin-bottom:4px}
@@ -73,29 +73,33 @@ th,td{text-align:left;padding:6px 10px 6px 0;border-bottom:1px solid var(--line)
 th{font-family:var(--mono);font-size:12px;color:var(--muted);font-weight:500}
 .links{display:flex;flex-wrap:wrap;gap:8px 18px;font-family:var(--mono);font-size:14px}
 footer{margin-top:40px;font-size:12px;color:var(--muted);font-family:var(--mono)}
-@media (max-width:560px){.hero svg.trace{display:none}.stat b{font-size:28px}}
+@media (max-width:560px){.hero svg.trace{display:none}.stat b{font-size:24px}}
+details{margin:0 0 14px;max-width:44em;border-left:3px solid var(--line);padding:2px 0 2px 12px}
+summary{cursor:pointer;font-family:var(--mono);font-size:12px;color:var(--muted)}
+details[open]>summary{margin-bottom:8px}
+details p,details li{font-size:14px;color:var(--muted);margin-bottom:6px}
 </style>
 <div class="wrap" id="root" data-lang="zh">
-<div class="bar"><span>IMU · 200 Hz · 6-axis · m/s</span>
+<div class="bar"><span>IMU · robot velocity · m/s</span>
 <span><button type="button" id="bzh" aria-pressed="true">中文</button> <button type="button" id="ben" aria-pressed="false">EN</button></span></div>
 
 <header class="hero">
 <svg class="trace" viewBox="0 0 420 150" aria-hidden="true"><path d="M0 120 C40 120 50 40 100 50 S160 130 210 90 S290 10 340 40 S400 100 420 70"/><path class="b" d="M0 128 C45 126 52 52 100 60 S165 128 212 100 S292 24 340 52 S402 104 420 84"/></svg>
 <p class="kicker">IROS 2026 · TARTANIMU CHALLENGE</p>
 <h1><span class="zh">只靠 IMU 估計速度，<br>一組權重通吃四種載具</span><span class="en">Velocity from an IMU alone,<br>one set of weights, four robots</span></h1>
-<p class="sub"><span class="zh">Kaggle 私榜第 20 名（131 隊），單人隊伍；用 2.17M 參數的小模型，另一支強隊的網路是 43.7M。</span><span class="en">20th of 131 on the Kaggle private leaderboard, solo entry, with a 2.17M-parameter model; one strong rival network is 43.7M.</span></p>
+<p class="sub"><span class="zh">讓機器人只靠一顆 IMU（量加速度與轉動的小感測器）估計自己的速度。我單人參賽，在 131 隊中拿到 Kaggle 私榜第 20 名，模型的參數量只有另一支強隊的約二十分之一。</span><span class="en">The goal: let a robot estimate its own velocity from a single IMU, a small sensor that measures acceleration and rotation. I entered alone and placed 20th of 131 on the Kaggle private leaderboard, with a model whose parameter count is about one-twentieth of a strong rival's.</span></p>
 <p class="name">Hao-Ting Ho · <span class="zh">何皓廷 · 東海大學電機系</span><span class="en">Dept. of Electrical Engineering, Tunghai University</span> · lexho2005@gmail.com</p>
 <div class="stats">
-<div class="stat"><b>20 / 131</b><span><span class="zh">Kaggle 私榜名次（分數 0.19912，越低越好）；主辦方後續列為前十隊伍之一，官方最終名次尚未公布</span><span class="en">Kaggle private leaderboard rank (score 0.19912, lower is better); the organizers later listed us among the top 10; the official final ranking is not yet announced</span></span></div>
-<div class="stat"><b>2.17M <small>vs 43.7M</small></b><span><span class="zh">模型大小（參數量），約 1/20</span><span class="en">model size (parameters), about 1/20</span></span></div>
-<div class="stat"><b>0.25878</b><span><span class="zh">用全部測試資料算的官方分數（越低越好；全部預測為零 = 1.0；主辦方基線 0.538）</span><span class="en">official full-test score (lower is better; all-zero = 1.0; organizer baseline 0.538)</span></span></div>
-<div class="stat"><b><span class="zh">研究負責人</span><span class="en">Research lead</span></b><span><span class="zh">方向、取捨、驗證規則、每次提交由我決定；實作由 AI agent 執行</span><span class="en">I set direction, trade-offs, validation rules and every submission; AI agents implemented</span></span></div>
+<div class="stat"><b>20 / 131</b><span><span class="zh">Kaggle 私榜名次。主辦方後續將本隊列為前十隊伍之一，官方最終名次尚未公布。</span><span class="en">Kaggle private leaderboard rank. The organizers later listed our team among the top 10; the official final ranking is not yet announced.</span></span></div>
+<div class="stat"><b class="zh">約二十分之一</b><b class="en">about 1/20</b><span><span class="zh">模型大小（參數量），相對於另一支強隊的網路</span><span class="en">model size (parameters) compared with the network of one strong rival team</span></span></div>
+<div class="stat"><b class="zh">約一半</b><b class="en">about half</b><span><span class="zh">官方分數約為主辦方參考模型（基線）的一半（越低越好）</span><span class="en">official score is about half of the organizer baseline (lower is better)</span></span></div>
+<div class="stat"><b><span class="zh">研究負責人</span><span class="en">Research lead</span></b><span><span class="zh">方向、取捨、驗證規則、每次提交由我決定。實作由 AI agent（Claude Code、Codex）</span><span class="en">I set direction, trade-offs, validation rules and every submission; implementation by AI agents (Claude Code, Codex)</span></span></div>
 </div>
 </header>
 
 <section><h2><i>01</i><span class="zh">問題</span><span class="en">The problem</span></h2>
-<p class="zh">車、四足狗、無人機、手持裝置，各自的運動方式完全不同。比賽要求同一組權重處理這四種載具，推論時不知道是哪一種，只給 200 Hz 的六軸 IMU（三軸加速度加三軸角速度），輸出速度。難在：IMU 量到的是加速度，積分起來會越漂越遠；而每種載具的動力學不一樣，例如無人機高速時空氣阻力很大。</p>
-<p class="en">A car, a quadruped, a drone and a handheld rig all move differently. The challenge asks for one set of weights across all four, with no platform label at inference: only 200 Hz six-axis IMU data (3-axis accelerometer and 3-axis gyro) in, velocity out. It is hard because the IMU measures acceleration, which drifts when integrated, and each platform has different dynamics; a fast drone, for example, is dominated by air drag.</p>
+<p class="zh">車、四足機器人、無人機、手持裝置的運動方式差很多。比賽要求同一組權重通吃，且不告訴模型是哪一種，只給 IMU 訊號、要它輸出速度。難處是加速度累加成速度時，誤差會越積越大。</p>
+<p class="en">A car, a quadruped robot, a drone and a handheld rig all move differently. The challenge asks for one set of weights across all four, without telling the model which one it is: it gets only the IMU signal and must output velocity. It is hard because the error grows as acceleration is accumulated into velocity.</p>
 </section>
 
 <section><h2><i>02</i><span class="zh">比賽成績</span><span class="en">Contest result</span></h2>
@@ -103,81 +107,120 @@ footer{margin-top:40px;font-size:12px;color:var(--muted);font-family:var(--mono)
 <p class="hl zh">名次</p><p class="hl en">RANKING</p>
 <p class="zh">Kaggle 私榜第 20 名（131 隊）；主辦方後續將本隊列為前十隊伍之一（2026-10-09 主辦方來信），官方最終名次尚未公布。</p>
 <p class="en">20th of 131 on the Kaggle private leaderboard; the organizers subsequently listed our team among the top 10 (organizers' e-mail, 2026-10-09); the official final ranking has not been announced.</p>
-<p class="mu zh">受邀加入 IMU Foundation Model 白皮書討論頻道；目前未列為作者，白皮書尚未發表。</p>
-<p class="mu en">Invited to the private working channel for the forthcoming IMU Foundation Model white paper. Not a listed author; the paper is unpublished.</p>
+<p class="mu zh">私榜：比賽結束後才公布排名的那一半測試資料。</p>
+<p class="mu en">Private leaderboard: the half of the test data whose ranking was published only after the contest closed.</p>
+<p class="mu zh">受邀參與主辦方的 IMU Foundation Model 白皮書討論；目前未列為作者，白皮書尚未發表。</p>
+<p class="mu en">Invited to take part in the organizers' discussion of the forthcoming IMU Foundation Model white paper. Not a listed author; the paper is unpublished.</p>
 </div>
-<p class="zh">IROS 2026 TartanIMU Challenge：私榜分數 <span class="num">0.19912</span>，提交的是我們比賽最終的模型（a3v20）。用全部測試資料算的官方分數是 <span class="num">0.25878</span>（越低越好，全部預測為零 = 1.0），主辦方的基線是 <span class="num">0.538</span>。9/8 加入、9/21 交件，約兩週。</p>
-<p class="en">IROS 2026 TartanIMU Challenge: private leaderboard score <span class="num">0.19912</span> with our final competition model (a3v20). The official full-test score is <span class="num">0.25878</span> (lower is better; all-zero = 1.0) against the organizer baseline of <span class="num">0.538</span>. I joined on 8 September and delivered on 21 September, about two weeks later (the contest itself opened earlier).</p>
-<p class="zh">限制：同樣的做法只換隨機種子重訓，另一次是 <span class="num">0.26933</span>；交出去的那次是事先指定的，但剛好落在較好的一側。只換種子，分數就會飄動約 0.0056。</p>
-<p class="en">Caveat: the same recipe retrained with another random seed scores <span class="num">0.26933</span>. The seed I submitted was fixed in advance but landed on the better side; changing only the seed moves the score by about 0.0056.</p>
+<p class="zh">限制：只換隨機種子（訓練開始時的隨機設定）重訓，分數就會上下起伏。我交出的種子是事先指定的，但剛好落在較好的一側。</p>
+<p class="en">Caveat: if only the random seed (the random setting that starts training) changes, the score moves up or down. The seed I submitted was fixed in advance, but it landed on the better side.</p>
+<details><summary><span class="zh">限制與細節</span><span class="en">Limits and details</span></summary>
+<p class="zh">我從加入比賽到交件約兩週（比賽本身更早開始）。官方分數是用全部測試資料算的，比較對象是主辦方基線。完整數字見 <a href="https://github.com/Jadiouo/tartanimu-unified-io/blob/main/docs/results.md" target="_blank" rel="noopener">results.md</a>。</p>
+<p class="en">From joining to delivery took about two weeks (the contest itself opened earlier). The official score is computed on the full test data and compared with the organizer baseline. Full numbers: <a href="https://github.com/Jadiouo/tartanimu-unified-io/blob/main/docs/results.md" target="_blank" rel="noopener">results.md</a>.</p>
+</details>
 </section>
 
 <section><h2><i>03</i><span class="zh">做法</span><span class="en">Approach</span></h2>
-<p class="zh">一個 2.17M 參數的網路：把資料切成 1 秒的窗，用雙向循環網路一次看 40 個窗；前面接兩個小模組先校正感測器偏差與姿態，後面是讓速度在窗與窗之間接力的輸出，接力的力度可以調。訓練前先讓模型玩「遮住一部分輸入再還原」的自監督預訓練。以下是本專案的技術貢獻：</p>
-<p class="en">One 2.17M-parameter network: the data is cut into 1-second windows and a bidirectional recurrent network reads 40 windows at once; two small modules in front correct sensor bias and attitude, and an output behind lets the velocity estimate carry over from window to window, with an adjustable strength. Before training it is pre-trained on a "mask part of the input and reconstruct it" task. Project contributions:</p>
+<p class="zh">核心是一個很小的網路，把訊號切成一秒一段、連著讀，輸出速度。本專案的技術貢獻：</p>
+<p class="en">The core is one small network: it cuts the signal into one-second windows, reads them in sequence and outputs velocity. Project contributions:</p>
 <ul class="zh">
-<li><b>診斷「模型不讀空氣阻力」。</b>把無人機衝刺序列的加速度放大或縮小，預測幾乎不動（變動小於 0.3 m/s），所以用符合物理的縮放造出更多快飛資料。官方分數 0.2702 → 0.26577，差距小於只換種子的飄動；四條衝刺序列都在 Kaggle 公開榜那一半，對私榜名次沒有貢獻。</li>
-<li><b>先校正、再接力。</b>官方分數 0.26577 → 0.25878；同時量出「接力力度」是取捨：開小有益，開大會讓一般行駛變遲鈍。</li>
-<li><b>時間縮放增強（把紀錄快轉）。</b>0.2837 → 0.2687，但同時把預訓練從 90 分鐘延長到 3 小時，兩者效應分不開；同類做法至少 4 隊獨立用過，不是新穎點。</li>
-<li><b>評估方法：用三把尺量三種不同的資料。</b>以「只換種子就會飄動的幅度」當門檻，擋掉太小的改動。</li>
+<li><b>發現模型不理會空氣阻力</b>：把加速度故意放大或縮小，預測幾乎不變。於是照物理造出更多快飛資料。</li>
+<li><b>先校正、再接力</b>：先校正感測器，再讓速度在段與段之間接力。</li>
+<li><b>時間縮放增強</b>：把飛行紀錄快轉。</li>
+<li><b>評估方法</b>：一般的驗證資料看不到最難的快飛，所以另外準備兩組考題。改動要大過只換種子的起伏才算數。</li>
 </ul>
 <ul class="en">
-<li><b>Diagnosing that the model ignores drag.</b> Scaling a drone sprint's acceleration up or down barely moves the prediction (less than 0.3 m/s), so I built more fast-flight data with physics-consistent scaling. Official score 0.2702 to 0.26577, smaller than run-to-run variation from random seeds; all four sprint sequences sit in the public half of the leaderboard, so this did not help the private rank.</li>
-<li><b>Correct first, then carry over.</b> Official score 0.26577 to 0.25878; I also measured that the carry-over strength is a trade-off: small helps, large makes ordinary driving sluggish.</li>
-<li><b>Time-scaling augmentation (fast-forwarding the recordings).</b> 0.2837 to 0.2687, but pre-training was lengthened from 90 min to 3 h at the same time, so the effects cannot be separated; at least 4 other teams used the same family of augmentation, so it is not novel.</li>
-<li><b>Evaluation method: three rulers for three kinds of data.</b> Run-to-run variation from random seeds is the gate that rejects changes that are too small.</li>
+<li><b>Finding that the model ignores air drag</b>: when the acceleration was deliberately scaled up or down, the prediction barely moved, so more fast-flight data was generated from physics.</li>
+<li><b>Calibrate first, then carry over</b>: calibrate the sensor first, then carry the velocity over from one window to the next.</li>
+<li><b>Time-scaling augmentation</b>: fast-forward the flight recordings.</li>
+<li><b>Evaluation method</b>: the standard validation data never shows the hardest fast flights, so two extra test sets were built, and a change only counts if it exceeds the seed-to-seed swing.</li>
 </ul>
+<p class="note"><span class="zh">限制：前兩項進步不大，和只換種子的起伏同一量級，不能算確定有效。第三項不是新點子，效果也和同時拉長的預訓練分不開。</span><span class="en">Limit: the first two gains are small, about the size of the seed-to-seed swing, so they cannot be counted as certainly effective. The third is not a new idea, and its effect cannot be separated from the longer pre-training introduced at the same time.</span></p>
 <figure class="fig">
-<div class="flow"><div class="zh">原始 IMU 200 Hz → 校正偏差與姿態 → 25 個輸入通道 → 卷積網路 → 雙向循環網路 ×2 → 直接預測＋跨窗接力 → 速度 <b>[比賽提交到此為止]</b></div><div class="zh">賽後：thisray 的後處理方法（借用）→ 階段二：地面機器人的修正 → 階段三：逐窗不確定度平滑</div>
-<div class="en">raw IMU 200 Hz → bias and attitude correction → 25 channels → convolutional net → bidirectional recurrent net ×2 → direct estimate + window-to-window carry-over → velocity <b>[contest entry ends here]</b></div><div class="en">after the contest: post-processing method from thisray (borrowed) → Step 2: ground-robot correction → Step 3: per-window uncertainty smoothing</div></div>
-<figcaption><span class="zh">上一行到速度為止是比賽提交；下一行是賽後延伸，thisray 的後處理方法為借用，階段二、三為本專案新增。</span><span class="en">The top line ends at the contest entry; the bottom line is the post-contest extension, where the thisray method is borrowed and Steps 2 and 3 were added by this project.</span></figcaption>
+<div class="flow"><div class="zh">IMU 訊號 → 校正偏差與姿態 → 抽出特徵 → 看前後文 → 預測並接力 → 速度 <b>[比賽提交到此為止]</b></div><div class="zh">賽後：借用 thisray 的後處理方法 → 階段二：地面修正 → 階段三：不確定度平滑</div>
+<div class="en">IMU signal → bias and attitude correction → feature extraction → read the context → estimate and carry over → velocity <b>[contest entry ends here]</b></div><div class="en">after the contest: post-processing method from thisray (borrowed) → Step 2: ground-robot correction → Step 3: uncertainty smoothing</div></div>
 </figure>
+<details><summary><span class="zh">限制與細節</span><span class="en">Limits and details</span></summary>
+<ul class="zh">
+<li>四條衝刺序列都在公開榜那一半（測試資料的另一半），所以第一項對私榜名次沒有貢獻。</li>
+<li>「接力力度」是取捨，開小有益，開大會讓一般行駛變遲鈍。</li>
+<li>時間縮放這一類做法，至少有四隊各自獨立用過。</li>
+<li>訓練前會先做自監督預訓練：遮住一部分輸入再還原，不需要速度答案。</li>
+<li>數字見 <a href="https://github.com/Jadiouo/tartanimu-unified-io/blob/main/docs/results.md" target="_blank" rel="noopener">results.md</a>。</li>
+</ul>
+<ul class="en">
+<li>All four sprint sequences are in the public half of the leaderboard (the other half of the test data), so the first item did not help the private rank.</li>
+<li>The carry-over strength is a trade-off: a little helps, a lot makes ordinary driving sluggish.</li>
+<li>At least four other teams independently used the same family of time-scaling augmentation.</li>
+<li>Before training, the network is pre-trained with a self-supervised task: hide part of the input and reconstruct it, which needs no velocity labels.</li>
+<li>Numbers: <a href="https://github.com/Jadiouo/tartanimu-unified-io/blob/main/docs/results.md" target="_blank" rel="noopener">results.md</a>.</li>
+</ul>
+</details>
 </section>
 
 <section><h2><i>04</i><span class="zh">賽後延伸</span><span class="en">Post-contest extension</span></h2>
-<p class="note"><span class="zh">賽後提交不計名次，也不與上面的比賽成績並列成「進步」。算法不同：比賽成績是私榜（48 條序列）的 0.19912；下圖是賽後補交、Kaggle 回傳的分數。</span><span class="en">Late submissions do not count for rank and are not a "progress line" from the contest score. Different basis: the contest score is the private half (48 sequences) 0.19912; the chart below shows Kaggle-returned scores for post-contest late submissions.</span></p>
-<p class="zh">先借用另一支參賽隊伍 thisray（Ssu-Rui Lee）賽後公開的後處理方法（程式 Apache-2.0；權重 CC-BY-NC-4.0），接到我的網路上，這是階段一（E）；再由本專案加兩步：階段二（F），地面機器人的修正只套一半強度；階段三（G），把「同一段資料從幾個角度預測、預測彼此不一致的程度」當作每個窗的不確定度，接進平滑器（這個點子是我提的）。階段二、三各自先拿出一部分資料不讓模型看、當作考題檢驗，並在上傳前先寫下怎樣才算有效；借來的階段一沒有這層保證。三個階段在 Kaggle 公開榜與私榜（測試資料的兩半）的分數見下圖，換算成官方分數約 0.182、0.179、0.178（近似，誤差約 ±0.0005）。</p>
-<p class="en">First I ported the post-processing method that another team, thisray (Ssu-Rui Lee), released after the challenge (code Apache-2.0, weights CC-BY-NC-4.0) onto my network, giving Step 1. This project then added two steps: Step 2, a half-strength correction for ground robots, and Step 3, where how much several predictions of the same window disagree is used as that window's uncertainty and fed into the smoother (my idea). Steps 2 and 3 were each checked on a held-out set the model never saw, with the pass/fail rule written before submission; the borrowed Step 1 has no such guarantee. Scores on the Kaggle public and private halves of the test data are charted below; converted to the official score they are about 0.182, 0.179, 0.178 (approximate, error about ±0.0005).</p>
-
+<p class="note"><span class="zh">比賽結束後我繼續改進。這部分不計名次，也不和比賽成績連成「進步」。</span><span class="en">After the contest I kept improving the model. This part does not count for rank, and it should not be read as a continuation of the contest score.</span></p>
+<ul class="zh">
+<li><b>借來的：</b>另一支隊伍 thisray 賽後公開了後處理方法（模型輸出後，再用物理規則修正）。我把它接到我的模型上，這是階段一，也是效果的主要來源。</li>
+<li><b>我加的：</b>階段二，針對地面機器人把修正調成一半強度；階段三，同一段資料從幾個角度各預測一次，預測差越多越沒把握，平滑時就少相信（這個點子是我提的）。</li>
+<li><b>怎麼把關：</b>我加的兩步都先留一批資料當考題，並在看結果前寫下怎樣才算有效。限制：階段二的強度是看過這批資料才選的，還沒在新資料上驗證。</li>
+</ul>
+<ul class="en">
+<li><b>Borrowed:</b> another team, thisray, released a post-processing method after the challenge (it fixes the model's output afterwards with physics rules). I ran it on my model. That is Step 1, and the main source of the gain.</li>
+<li><b>Added by me:</b> Step 2 applies the ground-robot correction at half strength. In Step 3 the same window is predicted from several angles, and the more the predictions disagree, the less the smoother trusts that window (my idea).</li>
+<li><b>How I checked:</b> for both of my steps I set aside a batch of data as an exam and wrote down what would count as success before looking at results. Caveat: the strength in Step 2 was chosen after seeing that data and has not been checked on new data.</li>
+</ul>
 <figure class="fig">
 <div class="chart" role="img" aria-label="Public and private scores of Steps 1 to 3">
 <div class="legend"><span class="zh">長條從 0 起算，越短越好 · 賽後補交</span><span class="en">bars start at zero, shorter is better · late submissions</span></div>
-<div><div class="gt"><span class="zh">階段一：接上公開的後處理方法</span><span class="en">Step 1: add a published post-processing method</span></div>
-<div class="row"><span><span class="zh">公開榜</span><span class="en">public</span></span><span class="track"><i style="width:64.8%;background:var(--bar-pub)"></i></span><b>0.22671</b></div>
-<div class="row"><span><span class="zh">私榜</span><span class="en">private</span></span><span class="track"><i style="width:41.1%;background:var(--bar-priv)"></i></span><b>0.14372</b></div></div>
-<div><div class="gt"><span class="zh">階段二：地面機器人的修正</span><span class="en">Step 2: correction for ground robots</span></div>
-<div class="row"><span><span class="zh">公開榜</span><span class="en">public</span></span><span class="track"><i style="width:64.2%;background:var(--bar-pub)"></i></span><b>0.22468</b></div>
-<div class="row"><span><span class="zh">私榜</span><span class="en">private</span></span><span class="track"><i style="width:39.9%;background:var(--bar-priv)"></i></span><b>0.13957</b></div></div>
-<div><div class="gt"><span class="zh">階段三：逐窗不確定度平滑</span><span class="en">Step 3: per-window uncertainty-weighted smoothing</span></div>
-<div class="row"><span><span class="zh">公開榜</span><span class="en">public</span></span><span class="track"><i style="width:63.8%;background:var(--bar-pub)"></i></span><b>0.22342</b></div>
-<div class="row"><span><span class="zh">私榜</span><span class="en">private</span></span><span class="track"><i style="width:39.7%;background:var(--bar-priv)"></i></span><b>0.13903</b></div></div>
+<div><div class="gt"><span class="zh">階段一：借來的後處理方法</span><span class="en">Step 1: the borrowed post-processing method</span></div>
+<div class="row"><span><span class="zh">公開榜</span><span class="en">public</span></span><span class="track"><i style="width:64.8%;background:var(--bar-pub)"></i></span><b>0.227</b></div>
+<div class="row"><span><span class="zh">私榜</span><span class="en">private</span></span><span class="track"><i style="width:41.1%;background:var(--bar-priv)"></i></span><b>0.144</b></div></div>
+<div><div class="gt"><span class="zh">階段二：地面修正</span><span class="en">Step 2: ground-robot correction</span></div>
+<div class="row"><span><span class="zh">公開榜</span><span class="en">public</span></span><span class="track"><i style="width:64.2%;background:var(--bar-pub)"></i></span><b>0.225</b></div>
+<div class="row"><span><span class="zh">私榜</span><span class="en">private</span></span><span class="track"><i style="width:39.9%;background:var(--bar-priv)"></i></span><b>0.140</b></div></div>
+<div><div class="gt"><span class="zh">階段三：不確定度平滑</span><span class="en">Step 3: uncertainty smoothing</span></div>
+<div class="row"><span><span class="zh">公開榜</span><span class="en">public</span></span><span class="track"><i style="width:63.8%;background:var(--bar-pub)"></i></span><b>0.223</b></div>
+<div class="row"><span><span class="zh">私榜</span><span class="en">private</span></span><span class="track"><i style="width:39.7%;background:var(--bar-priv)"></i></span><b>0.139</b></div></div>
 </div>
-<figcaption><span class="zh">公開榜 41 條序列，私榜 48 條。比例如實：階段之間的差距很小。階段一有兩個版本，後一版的私榜反而比前一版差 0.0027（兩版都上傳後取較好者，帶一個選擇位元）；階段二、三兩邊皆較前一階段低。階段二的一半強度是看過 27 條留出錄製的結果才選的，三次驗證用同一批，不能說已在新場次證明有效。</span><span class="en">Public has 41 sequences, private 48. Proportions are honest: step-to-step differences are small. Step 1 had two variants and the later one scored 0.0027 worse on private (the better of the two was kept, one extra pick between two options); Steps 2 and 3 are lower than the previous step on both halves. The half strength in Step 2 was chosen after seeing results on 27 held-out recordings, and all three checks reuse that set, so it is not shown to hold on new sessions.</span></figcaption>
 </figure>
-
+<p class="zh">借來的方法對無人機很有效，對車子反而變差。我加的兩步各只再進步一點點。</p>
+<p class="en">The borrowed method works very well on drones and makes cars worse; my two steps each add only a little more.</p>
+<details><summary><span class="zh">限制與細節</span><span class="en">Limits and details</span></summary>
 <ul class="zh">
-<li>地面機器人的修正，相對完整的後處理：分數 −5.74%、−6.12%、−5.67%（三次訓練，27 條地面留出錄製，95% 區間排除 0；越低越好）。</li>
-<li>完整的後處理對無人機留出錄製的速度誤差 −49.0%，對車子的速度誤差 +14.6%：他人的修正對無人機很有效，對地面載具幾乎沒有淨效果。</li>
-<li>接上同一個公開方法時，我的階段一約 0.182，thisray 公布 0.188（其報告，我未重驗），差距小於只換種子的飄動，不能說誰較好。</li>
+<li>thisray 的全名是 Ssu-Rui Lee。程式 Apache-2.0，權重 CC-BY-NC-4.0（限研究用途）。</li>
+<li>階段一也先寫了判準，並在無人機錄製上做過留出檢查。但車、四足機器人、手持裝置當時沒有乾淨的正面證據，把關比階段二、三弱。</li>
+<li>階段一分幾次補交逐步接上。最後兩版裡，後一版私榜略差、公開榜較好，我兩版都上傳後留下後一版（圖上就是它）。</li>
+<li>階段二的一半強度是看過留出資料才選的，三次檢驗用同一批，不能說已在新場次證明有效。</li>
+<li>在留出的地面錄製上，階段二比完整後處理好約 6%（三次檢驗：原本的權重、同種子重訓一次、換種子重訓一次，結果一致）。</li>
+<li>完整後處理讓無人機的速度誤差約少一半，車子的約增加 15%。</li>
+<li>我的階段一和 thisray 公布的成績（取自其報告，我未重驗）差距，小於只換種子的起伏，不能說誰較好。</li>
+<li>完整表格與算法見 <a href="https://github.com/Jadiouo/tartanimu-unified-io/blob/main/docs/post_competition.md" target="_blank" rel="noopener">post_competition.md</a>。</li>
 </ul>
 <ul class="en">
-<li>Ground-robot correction vs the full post-processing (score): −5.74%, −6.12%, −5.67% (three trainings, 27 held-out ground recordings, 95% intervals exclude 0; lower is better).</li>
-<li>The full post-processing cuts velocity error on the drone held-out set by 49.0% but raises it on cars by 14.6%: the borrowed correction is very effective on drones and nets almost nothing on ground platforms.</li>
-<li>With the same published method, my Step 1 is about 0.182 and thisray reports 0.188 (their report, not re-verified). The gap is smaller than run-to-run variation from random seeds; neither is better.</li>
+<li>thisray's full name is Ssu-Rui Lee; the code is Apache-2.0 and the weights are CC-BY-NC-4.0 (research use only).</li>
+<li>Step 1 also had its pass/fail rule written first and a held-out check on drone recordings, but for the car, the quadruped and the handheld rig there was no clean positive evidence at the time, so its checking is weaker than for Steps 2 and 3.</li>
+<li>Step 1 was added over several late submissions. Of the last two variants, the later one scored slightly worse on private and better on public; I uploaded both and kept the later one (the one in the chart).</li>
+<li>The half strength in Step 2 was chosen after seeing the held-out data, and all three checks reuse that set, so it is not shown to hold on new sessions.</li>
+<li>On the held-out ground recordings, Step 2 is about 6% better than the full post-processing (three checks: the original weights, one retraining with the same seed and one with a different seed, all consistent).</li>
+<li>The full post-processing cuts the drone's velocity error by about half and raises the car's by about 15%.</li>
+<li>The gap between my Step 1 and the score thisray reports (from their report, not re-verified) is smaller than the swing from the random seed, so I cannot say which is better.</li>
+<li>Full table and method: <a href="https://github.com/Jadiouo/tartanimu-unified-io/blob/main/docs/post_competition.md" target="_blank" rel="noopener">post_competition.md</a>.</li>
 </ul>
+</details>
 </section>
 
 <section><h2><i>05</i><span class="zh">方法論</span><span class="en">Method</span></h2>
 <table>
 <tr><th><span class="zh">做法</span><span class="en">Practice</span></th><th><span class="zh">實例</span><span class="en">Example</span></th></tr>
-<tr><td><span class="zh">留出考題資料</span><span class="en">Held-out set</span></td><td><span class="zh">先拿出 39 條地面與無人機錄製，三個訓練階段都不讓模型看（自監督預訓練見過它們的感測器資料，所以不是最嚴格）。</span><span class="en">39 recordings kept out of all three training stages (the self-supervised pre-training saw their sensor data, so this is not strict).</span></td></tr>
-<tr><td><span class="zh">上傳前寫判準</span><span class="en">Rule before results</span></td><td><span class="zh">每次上傳前先寫下怎樣才算有效，共 12 份。限制：自行存檔、無第三方時間戳，部分與結果在同一次版本紀錄。</span><span class="en">12 documents, each writing down the pass/fail rule before looking at results. Limit: self-archived, no third-party timestamp, and some share a code snapshot (commit) with their results.</span></td></tr>
-<tr><td><span class="zh">另一模型重算</span><span class="en">Independent recompute</span></td><td><span class="zh">另一個 AI 模型（Codex）重算地面留出分析，與原數字差小於 1e-6；也有專門挑錯的審查。</span><span class="en">A different AI model (Codex) recomputed the ground analysis; difference below 1e-6. A separate adversarial review also attacked the results.</span></td></tr>
-<tr><td><span class="zh">換種子重做</span><span class="en">Repeat with other seeds</span></td><td><span class="zh">地面修正在兩次不同的隨機種子重訓中，改善都重現。</span><span class="en">The ground correction's improvement reproduced in two retrainings with different random seeds.</span></td></tr>
-<tr><td><span class="zh">負結果照記</span><span class="en">Negative results kept</span></td><td><span class="zh">多對齊平均（同一段資料換幾種對齊方式預測再取平均）不通過；拿掉車子那一段不顯著；用網路預測不確定度不如簡單的離散度、不提交；地面新增的四個子模型無一通過。</span><span class="en">Multi-alignment averaging failed; dropping the car segment was not significant; a network-predicted uncertainty lost to the simple disagreement measure and was not submitted; none of four new ground sub-models passed.</span></td></tr>
+<tr><td><span class="zh">留出考題資料</span><span class="en">Held-out set</span></td><td><span class="zh">拿出一批錄製，三個訓練階段都不讓模型看。限制：自監督預訓練（訓練前那一步）看過它們的感測器訊號，不是最嚴格。</span><span class="en">I set aside recordings that none of the three training stages saw. The self-supervised pre-training (the step before training) did see their sensor signals, so this is not the strictest version.</span></td></tr>
+<tr><td><span class="zh">上傳前寫判準</span><span class="en">Rule before results</span></td><td><span class="zh">每次上傳前先寫下怎樣才算有效，共十二份。限制：自行存檔、無第三方時間戳，部分與結果在同一次版本紀錄。</span><span class="en">Before each upload I wrote down what would count as success (twelve documents). Limit: self-archived, no third-party timestamp, and some share a code snapshot (commit) with their results.</span></td></tr>
+<tr><td><span class="zh">另一模型重算</span><span class="en">Independent recompute</span></td><td><span class="zh">另一個 AI 模型（Codex）重算地面分析，結果吻合。另有專門挑錯的審查。</span><span class="en">A different AI model (Codex) recomputed the ground analysis and matched my numbers. A separate adversarial review also attacked the results.</span></td></tr>
+<tr><td><span class="zh">換種子重做</span><span class="en">Repeat with other seeds</span></td><td><span class="zh">地面修正重訓了兩次（一次同種子、一次換種子），改善都重現。</span><span class="en">The ground correction's improvement reproduced in two retrainings, one with the same seed and one with a different seed.</span></td></tr>
+<tr><td><span class="zh">負結果照記</span><span class="en">Negative results kept</span></td><td><span class="zh">沒效的也記下來，例如多對齊平均（同一段資料換幾種對齊方式預測再取平均）沒通過、地面修正拿掉車子就不顯著。</span><span class="en">What failed is recorded too, for example: multi-alignment averaging (predict the same data under several alignments and average) failed, and the ground correction was not significant without the car.</span></td></tr>
 <tr><td><span class="zh">作廢自己的結論</span><span class="en">Retracting my own result</span></td><td><span class="zh">發現比賽模型對驗證資料來說是「看過答案」的，該輪結果不當證據。</span><span class="en">Found that the competition model had seen the validation data in training, and discarded that round as evidence.</span></td></tr>
 </table>
-<p class="note"><span class="zh">揭露：賽後至少 6 次補交（階段一到三的各版本）用 Kaggle 回傳分數做取捨；比賽中用官方計分服務查詢 33 次；賽後另有約 89 次逐序列探針提交（每次只改一條序列），用來還原公開榜 41 條／私榜 48 條的分組。測試標籤從未使用，探針量到的真值也沒有拿來校正輸出。</span><span class="en">Disclosure: at least 6 post-contest late submissions (the variants of Steps 1 to 3) used returned scores for choices; 33 official-scorer queries during the contest; after the contest about 89 per-sequence probe submissions (one sequence changed each time) were used to recover the public 41 / private 48 split. Test labels were never used, and the true values the probes revealed were not used to correct outputs.</span></p>
+<p class="note"><span class="zh">揭露：比賽中，我用官方計分服務查詢了 33 次。賽後至少補交了 6 次（階段一到三的各版本），並用 Kaggle 回傳的分數做取捨。比賽結束後（2026-09-30）另做了約 89 次逐序列探針提交（每次只改一條序列），用來還原測試資料如何分成公開榜與私榜。測試標籤從未使用；探針回傳的分數沒有拿來調整任何輸出，但探針與官方查詢的結果曾用於診斷。明細見 <a href="https://github.com/Jadiouo/tartanimu-unified-io/blob/main/docs/post_competition.md" target="_blank" rel="noopener">post_competition.md</a>。</span><span class="en">Disclosure: during the contest I queried the official scoring service 33 times. After the contest I made at least 6 late submissions (the variants of the three steps) and used the returned scores to choose between them. I also made about 89 probe submissions on 2026-09-30, after the contest had closed, each changing one sequence, to recover how the test data splits into the public and private halves. Test labels were never used; the scores the probes returned were not used to adjust any output, but the probe and official-query results were used for diagnosis. Details: <a href="https://github.com/Jadiouo/tartanimu-unified-io/blob/main/docs/post_competition.md" target="_blank" rel="noopener">post_competition.md</a>.</span></p>
 </section>
 
 <section><h2><i>06</i><span class="zh">我的角色</span><span class="en">My role</span></h2>
@@ -193,6 +236,7 @@ footer{margin-top:40px;font-size:12px;color:var(--muted);font-family:var(--mono)
 </section>
 
 <section><h2><i>08</i><span class="zh">連結與聯絡</span><span class="en">Links and contact</span></h2>
+<p class="note"><span class="zh">完整數字與算法：<a href="https://github.com/Jadiouo/tartanimu-unified-io/blob/main/docs/results.md" target="_blank" rel="noopener">results.md</a>、<a href="https://github.com/Jadiouo/tartanimu-unified-io/blob/main/docs/post_competition.md" target="_blank" rel="noopener">post_competition.md</a>、<a href="https://github.com/Jadiouo/tartanimu-unified-io/blob/main/docs/canonical_numbers.md" target="_blank" rel="noopener">canonical_numbers.md</a>、<a href="https://github.com/Jadiouo/tartanimu-unified-io/blob/main/docs/chronicle.md" target="_blank" rel="noopener">chronicle.md</a>。</span><span class="en">Full numbers and methods: <a href="https://github.com/Jadiouo/tartanimu-unified-io/blob/main/docs/results.md" target="_blank" rel="noopener">results.md</a>, <a href="https://github.com/Jadiouo/tartanimu-unified-io/blob/main/docs/post_competition.md" target="_blank" rel="noopener">post_competition.md</a>, <a href="https://github.com/Jadiouo/tartanimu-unified-io/blob/main/docs/canonical_numbers.md" target="_blank" rel="noopener">canonical_numbers.md</a>, <a href="https://github.com/Jadiouo/tartanimu-unified-io/blob/main/docs/chronicle.md" target="_blank" rel="noopener">chronicle.md</a>.</span></p>
 <div class="links">
 <a href="https://github.com/Jadiouo/tartanimu-unified-io" target="_blank" rel="noopener">GitHub</a>
 <a href="https://huggingface.co/LexHo/tartanimu-a3v20" target="_blank" rel="noopener">Hugging Face</a>

@@ -2,6 +2,8 @@
 
 A day-by-day record of the two weeks (joined 2026-09-08, delivered 09-21): what was tried, what it scored on which ruler, what was decided, and what the artefacts are. Times are Taipei (GMT+8). Every number carries a tag that can be traced to `runs/official/` (official scoring service) or to the training run of that name.
 
+> **Roles in this document.** "User" and "owner" mean the author himself, the research lead of this one-person team: he decided the research direction, the trade-offs, the validation rules and every submission. "Executor" and "reviewer" mean the AI coding agents (Claude Code, Codex) that implemented the work and ran the experiments under his direction.
+
 ---
 
 ## 0. Conventions
@@ -27,7 +29,7 @@ A day-by-day record of the two weeks (joined 2026-09-08, delivered 09-21): what 
 
 | | |
 |---|---|
-| Final standing | **20th of 131 teams** (private leaderboard 0.19912, published 2026-09-28) |
+| Kaggle private leaderboard (provisional; published 2026-09-28) | **20th of 131 teams** (private leaderboard 0.19912) |
 | Delivered | **a3v20_s42**: official **0.25878** (ATE20 0.61704 / AVE 0.22017), public 0.32793; HF `LexHo/tartanimu-a3v20` |
 | Second entry | a3v21_s42: official 0.26306, public 0.32695; HF `LexHo/tartanimu-a3v21` |
 | Start → end | val 1.015 (all-zero) → 0.1746 (tv_film); public 1.054 → 0.3270; official 0.3057 (first query, 9/12) → 0.2588 |
@@ -135,10 +137,10 @@ A day-by-day record of the two weeks (joined 2026-09-08, delivered 09-21): what 
 - 00:16 `a3v22_s42` trained (moe.py fixed); 01:45 sent to the official service and Kaggle at the user's request: **0.26359 / 0.34375** (car 0.355 out of band, tail 13.07, drone ATE 1.151 better but AVE 0.689 worse) → does not replace a3v20. tv_film_s43 val 0.1770 (≤ 0.178) → Kaggle finals **a3v20 + a3v21**. All four instances stopped 01:30.
 - HF: `LexHo/tartanimu-a3v20` (public, commit 2426e014; after re-download, isolated dry-run 85 s / 2.0 GB / max diff 1.9e-3), `LexHo/tartanimu-a3v21` (1b0d0829; 69 s / 1.4 GB / 1.6e-3). Forms submitted; technical report v5.1 (eight investigations) attached.
 
-### 9/28 (Sun) final standings
+### 9/28 (Sun) Kaggle private leaderboard (provisional)
 - The private leaderboard was published: **20th of 131 teams, 0.19912** (`a3v20_s42`, the delivered model). Public column 0.32695 (best public over all my submissions, from a3v21; the delivered a3v20 scored 0.32793 public).
-- The private half ranks fourteen of my submissions between 0.1932 and 0.2094 — seven ranks. The best of them on that half would have been 18th (`a3dnTV3td`, the day-7 model); on the full 89-sequence test, which is the better estimator, the delivered model beats both other finalists. On that estimator the rule's pick ranked first of the three finalists, within seed noise.
-- No certificate is issued: the competition is a Kaggle Community competition (reward "Kudos", no medals or points), and the organisers' only announced recognition is an invitation to the *IMU Foundation Model* white paper for the top 10. Verification links and exports: `docs/results.md` §5 and `docs/evidence/`.
+- The private half ranks fourteen of my submissions between 0.1932 and 0.2094 — seven ranks. The best of them on that half would have been 18th (`a3dnTV3td`, the day-7 model); on the full 89-sequence test, which is the better estimator, the delivered model beats both other candidate entries. On that estimator the rule's pick ranked first of the three candidate entries, within seed noise.
+- No certificate is issued: the competition is a Kaggle Community competition (reward "Kudos", no medals or points), and the organisers' only announced recognition is an invitation to the *IMU Foundation Model* white paper for the top 10. Verification links and exports: `docs/results.md` §6 and `docs/evidence/`.
 
 ---
 
@@ -279,15 +281,8 @@ Reading: all progress from 9/12 to 9/20 is drone (0.844 → 0.675 AVE); T lowers
 | 25 | 09/20 20:34 | sub_test_a3v21_s42.csv | 0.32695 | S-fast + trajectory FiLM |
 | 26 | 09/21 01:39 | sub_test_a3v22_s42.csv | 0.34375 | a3v20 + trajectory FiLM |
 
-### 5.3 GPU usage (estimate)
-| Resource | Period | Usage |
-|---|---|---|
-| local GPU | 9/8–9/17 | 8–20 min per run, ≈ 300 runs, ≈ 60 h |
-| Kaggle T4 (free) | 9/9–9/16 | MoE, equivariance, gsP seeds, YA/YB, AA, ≈ 30 kernel-h |
-| cloud RTX 3090 ×2 | 9/16 night–9/21 | ≈ 45 h |
-| cloud RTX 4090 ×2 | 9/16 night | node failure, refunded |
-| cloud RTX 5090 ×2 | 9/18–9/21 | ≈ 30 h; 20–30 min per card |
-| SSL pre-training | 9/13, 9/16 | dense120 2 h, dense180_tv 3 h, dense600 5 h |
+### 5.3 GPU usage
+No GPU-hour figure is given: run-level timing was not recorded (see the summary table at the top of this file). Hardware used: local GPU, Kaggle T4, and cloud RTX 3090/4090/5090.
 
 ---
 
@@ -391,7 +386,7 @@ Reading: all progress from 9/12 to 9/20 is drone (0.844 → 0.675 AVE); T lowers
 ## 9. What we would do differently
 1. **Rulers before methods**: val was blind to groups A/B/C; the folds only existed from 9/17; part of the thirty-plus nulls of 9/8–9/16 were nulls of the ruler, not of the idea.
 2. **Hit where the gap is**: the last four days went entirely into the tail (A+B, a fifth of the gap); four fifths of the gap is the 41 ordinary drone flights (D+C) — the best public entry (AxisTilted2) gets drone AVE to 0.515 (ours 0.675) with 64-s contexts, a bias/gravity-state smoother, spectral features and a segment-level ATE loss.
-3. **Physics in a smoother, not in a forward recursion**: our EKF gain lags as soon as it opens; the top entry solves one least-squares problem with bias states over the whole context.
+3. **Physics in a smoother, not in a forward recursion**: our EKF gain lags as soon as it opens; AxisTilted2 solves one least-squares problem with bias states over the whole context.
 4. **Time warping up to 2.0 and short 32-window chunks** (BShankar) — cheap and verifiable.
-5. **Honest disclosure of seed selection**: both top competitors picked the best of six seeds; our rule A pre-designated the seed, and a3v20 s42 happened to be the good one (family 0.259–0.269).
+5. **Honest disclosure of seed selection**: one top competitor disclosed picking the best of six seeds on the official scorer; our rule A pre-designated the seed, and a3v20 s42 happened to be the good one (family 0.259–0.269).
 6. Process: self-stop on completion, not on a timer; logs into persistent storage; bootstrap installs every file; `pkill -f` kills its own shell; Seq ID = file index + 1.

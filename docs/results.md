@@ -6,10 +6,10 @@ The contest figures on this page can be checked against public sources (links in
 
 ---
 
-## 1. Final standing
+## 1. Kaggle private leaderboard (provisional; published 2026-09-28)
 
 **20th of 131 on the Kaggle private leaderboard; the organizers subsequently listed our team among the top 10 (organizers' e-mail, 2026-10-09); the official final ranking has not been announced.** IROS 2026 TartanIMU Challenge (CMU AirLab / Super Odometry), Kaggle team `Lexxxxx`, single human author (implementation by AI coding agents under my direction, see the README).
-Private leaderboard score **0.19912**; public score of the final competition model 0.32793 (the leaderboard's public column shows 0.32695, the best public over all my submissions, which belongs to my second entry). The competition closed 2026-09-21; final standings were published 2026-09-28.
+Private leaderboard score **0.19912**; public score of the final competition model 0.32793 (the leaderboard's public column shows 0.32695, the best public over all my submissions, which belongs to my second entry). The competition closed 2026-09-21. The Kaggle private leaderboard was published on 2026-09-28; the organizers describe it as provisional, and the official final ranking has not been announced.
 
 | # | Team | Private score ↓ |
 |---:|---|---|
@@ -24,15 +24,15 @@ Private leaderboard score **0.19912**; public score of the final competition mod
 | **20** | **Lexxxxx** (this work) | **0.19912** |
 | 21 | Dehan Shen | 0.20181 |
 
-Full table: [`evidence/private_leaderboard.csv`](evidence/private_leaderboard.csv).
+The `evidence/` folder keeps only our team's row and the total number of teams; the full leaderboard is on the [Kaggle leaderboard page](https://www.kaggle.com/competitions/tartan-imu-challenge-iros2026/leaderboard).
 
 **Score** = 0.6·AVE/0.7356 + 0.4·ATE₂₀/3.1160, each macro-averaged over the four platforms; an all-zero submission scores 1.000. Of the 89 test sequences, 48 count for the private leaderboard and 41 for the public one; the organizers' scoring service uses all 89.
 
 ## 2. Official scoring service (all 89 test sequences)
 
-For reference, the organizers' released 4-head baseline scores 0.937 on the public leaderboard when its best head is forced for every platform (an all-zero submission scores 1.054 there); it has no mechanism to infer the platform on the anonymised test, which is why this work trains one unified model instead.
+For reference, the organizers' released 4-head baseline scores 0.937 on the public leaderboard when its best head is forced for every platform (an all-zero submission scores 1.054 there); it has no mechanism to infer the platform on the anonymised test, which is why this work trains one unified model instead. (On the full test the organizers' baseline scores 0.538 by the official formula, from its ATE20 1.261 and AVE 0.461; the 0.637 that the technical report's Table III lists for it is its public-leaderboard score.)
 
-This is the number I designed against. The scoring service returns per-platform and per-sequence errors, not only a total, so it is the honest estimator of the final standing; 33 queries were spent over the two weeks and every one is in [`../runs/official/`](../runs/official/).
+This is the number I designed against. The scoring service returns per-platform and per-sequence errors, not only a total, so it is the honest estimator of how the model ranks; 33 queries were spent over the two weeks and every one is in [`../runs/official/`](../runs/official/).
 
 | Model | Score ↓ | car ATE | human ATE | dog ATE | drone ATE / AVE | four-sprint drone tail, summed AVE |
 |---|---|---|---|---|---|---|
@@ -60,14 +60,14 @@ All of it is drone: platform AVE went 0.844 → 0.675 between the first and the 
 
 ## 4. Honest notes
 
-- **The private half compresses a lot of work into very few ranks.** Fourteen of my submissions land between 0.1932 and 0.2094 there — a band seven ranks wide (18th to 24th). The best of them (an earlier model, `a3dnTV3td`) would have been 18th; the delivered one is 20th. On the full 89-sequence test the delivered model is the best of my three finalist entries (0.2588 vs 0.2631 vs 0.2636), so on that estimator the rule's pick was the lowest of the three, though the margin (0.0043) is within seed noise and I do not claim it was the better model — the private half simply splits the four sprint sequences differently.
-- **The gap to the top is drone, and mostly not the tail.** 84 % of the distance to the leading entries is drone AVE, and about 61 % of that sits on the 41 ordinary flights, the rest on the four sprints I spent the last four days on. The leading entry reaches drone AVE 0.515 with 64-second contexts and a smoother that tracks accelerometer bias and gravity — physics in a smoother, not in a forward recursion. Written up in [`peer_survey.md`](peer_survey.md).
+- **The private half compresses a lot of work into very few ranks.** Fourteen of my submissions land between 0.1932 and 0.2094 there — a band seven ranks wide (18th to 24th). The best of them (an earlier model, `a3dnTV3td`) would have been 18th; the delivered one is 20th. On the full 89-sequence test the delivered model is the best of my three candidate entries (0.2588 vs 0.2631 vs 0.2636), so on that estimator the rule's pick was the lowest of the three, though the margin (0.0043) is within seed noise and I do not claim it was the better model — the private half simply splits the four sprint sequences differently.
+- **The gap to a stronger entry is drone, and mostly not the tail.** 84 % of the distance to AxisTilted2 (5th on the private leaderboard, and the best-scoring public entry I surveyed at the deadline) is drone AVE, and about 61 % of that sits on the 41 ordinary flights, the rest on the four sprints I spent the last four days on. That entry reaches drone AVE 0.515 with 64-second contexts and a smoother that tracks accelerometer bias and gravity — physics in a smoother, not in a forward recursion. Written up in [`peer_survey.md`](peer_survey.md).
 - **What did not work is documented as carefully as what did**: about 50-60 entries (not counted line by line), each with the number that killed it, in [`chronicle.md §6`](chronicle.md).
-- **Compliance**: one model, one checkpoint, no routing to per-robot sub-models, no ensembling, no test-time averaging, no external data in the delivered model, test labels never used. Discarded branches that touched external or unlabelled-test data were disclosed to the organizers and scored at most once; details in [`canonical_numbers.md §D`](canonical_numbers.md).
+- **Compliance**: one model, one checkpoint, no routing to per-robot sub-models, no ensembling, no test-time augmentation or multi-view averaging (the only averaging is between overlapping chunks (stride K/2) of the model's own output), no external data in the delivered model, test labels never used. Discarded branches that touched external or unlabelled-test data were disclosed to the organizers and scored at most once; details in [`canonical_numbers.md §D`](canonical_numbers.md).
 
 ## 5. After the competition
 
-Late submissions do not count for the ranking. Porting another team's published post-processing onto this network, then adding a ground-robot correction and per-window uncertainty smoothing, brought the Kaggle-returned scores to public 0.22342 / private 0.13903 (approx. full-test 0.178). I also submitted about 89 one-sequence probe files to recover which sequences are public and which private; the test values this revealed were not used to adjust any output. These are not contest results and are not placed in the table above; everything, with provenance, is in [`post_competition.md`](post_competition.md).
+Late submissions do not count for the ranking. Porting another team's published post-processing onto this network, then adding a ground-robot correction and per-window uncertainty smoothing, brought the Kaggle-returned scores to public 0.22342 / private 0.13903 (approx. full-test 0.178). On 2026-09-30, after the competition had closed, I also submitted about 89 one-sequence probe files to recover which sequences are public and which private; the values measured this way were not used to adjust any output, but the probe results and the 33 official queries were used for diagnosis. These are not contest results and are not placed in the table above; everything, with provenance, is in [`post_competition.md`](post_competition.md).
 
 ## 6. Verify
 
@@ -78,6 +78,6 @@ Late submissions do not count for the ranking. Porting another team's published 
 | Competition | https://www.kaggle.com/competitions/tartan-imu-challenge-iros2026 · https://superodometry.com/imuchallenge |
 | Frozen weights + the exact scored `submission.csv` | https://huggingface.co/LexHo/tartanimu-a3v20 · https://huggingface.co/LexHo/tartanimu-a3v21 |
 | Technical report submitted to the organizers | [`../report/technical_report.pdf`](../report/technical_report.pdf) |
-| Screenshots, leaderboard exports, full submission history | [`evidence/`](evidence/) |
+| Screenshots, our team's leaderboard rows (only our row and the total team count; the full leaderboard is on the Kaggle leaderboard page), full submission history | [`evidence/`](evidence/) |
 
 The delivery package re-executes from the frozen weights on CPU in 85 s in an isolated environment (no network, empty cache) and reproduces the scored `submission.csv` to a maximum component difference of 1.9 × 10⁻³ m/s.

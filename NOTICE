@@ -1,0 +1,9 @@
+Third-party material in this repository
+
+The MIT licence in LICENSE covers the original code and documents of this repository (copyright Hao-Ting Ho). It does not cover the following.
+
+1. report/ieeeconf.cls
+   A copy of the IEEE LaTeX class (IEEEtran, version V1.6b, 2002/11/18, copyright Gerry Murray, Silvano Balemi, et al.). It is third-party material and stays under the licence stated in its own file header (the Perl Artistic License). It is not part of this repository's MIT licence.
+
+2. unified/data.py (partly) and unified/model.py
+   Parts of unified/data.py were ported from a publicly shared notebook for this competition (ts-tcmpio-unified-temporal-resnet.ipynb), and the module header of unified/model.py says its architecture was ported from the same notebook. I did not write that notebook. Its author and licence are not yet recorded here; the ported parts are credited to that notebook and are not covered by this repository's MIT licence.

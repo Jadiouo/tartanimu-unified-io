@@ -2,6 +2,8 @@
 
 Purpose: the next time a "sensor sequence → regression" model is built, open the layer that matches the problem. Every layer has **symptom → what happened this time → rule → checklist**. Source: `chronicle.md`.
 
+> **Roles in this document.** "User" and "owner" mean the author himself, the research lead of this one-person team: he decided the research direction, the trade-offs, the validation rules and every submission. "Executor" and "reviewer" mean the AI coding agents (Claude Code, Codex) that implemented the work and ran the experiments under his direction.
+
 ---
 
 ## 0. The ten problems that kept coming back (read this table first)
@@ -137,7 +139,7 @@ Purpose: the next time a "sensor sequence → regression" model is built, open t
 
 - Keep the execution role (training, GPUs, delivery) and the review role (code review, analysis, recommendations) separate; communicate through a written log where every message carries numbers and tags.
 - The review side does a code review before cards are spent (three rounds caught six bugs this time); the execution side lists "where the three rulers contradict each other" after every batch.
-- The project owner decides only: goals, resource ceilings, approval of anything outside the plan, trade-offs that cannot be resolved; and the schedule.
+- The project owner decides only: the research direction and goals, the validation rules, every submission, resource ceilings, approval of anything outside the plan, trade-offs that cannot be resolved; and the schedule.
 
 ---
 
