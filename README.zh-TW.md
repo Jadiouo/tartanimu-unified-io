@@ -6,35 +6,27 @@
 
 **一段話說完。** IMU 是手機和機器人裡常見的小型動作感測器（加速度計加陀螺儀）。這個專案只靠它來估計機器人跑多快，對象是車、四足機器狗、無人機、手持裝置四種載具，而且要求**同一組訓練好的權重處理全部四種，推論時也不告訴模型現在是哪一種**。難處在於同樣的感測器讀數在不同載具上代表不同的運動，無人機的高速衝刺和狗慢慢走路的訊號完全不像。
 
-**比賽成績。** IROS 2026 TartanIMU Challenge：**Kaggle 私榜第 20 名（131 隊）；主辦方後續將本隊列為前十隊伍之一（2026-10-09 主辦方來信），官方最終名次尚未公布。** 私榜分數 **0.19912**（越低越好；全部猜零速度得 1.0）。主辦方自己的計分服務用全部 89 條測試序列計算，我的比賽最終模型（代號 `a3v20_s42`）得 **0.25878**。另外，2026 年 10 月我受邀參與主辦方的 IMU Foundation Model 白皮書討論；我目前未列為作者，白皮書尚未發表。
+**比賽成績。** IROS 2026 TartanIMU Challenge：**主辦方內部評比第 12 名（2026-11-19 主辦方回覆）；Kaggle 私榜第 20 名（131 隊）。**（私榜是比賽結束後才公布排名的那一半測試資料。）Kaggle 的排名是暫定的；依主辦方比賽頁，正式名次由主辦方另行評定。用白話說：我的模型參數量（決定模型大小的可調數字的個數）約為另一支較強隊伍（thisray）網路的二十分之一，官方分數（主辦方用全部測試資料計算，越低越好）約為主辦方基線模型的一半。另外，2026 年 10 月我受邀參與主辦方的 IMU Foundation Model 白皮書討論；我目前未列為作者，白皮書尚未發表。
 
-**模型很小。** 2.17M 參數（另有兩個凍結的輔助模組共 78k），約為較強隊伍（thisray）43.7M 參數網路的 1/20。我把力氣花在物理一致的資料增強、學習式的感測器校正通道，以及一套我信得過的評估方法，而不是加大模型。這些在官方分數上帶來的兩步進步（0.0044、0.0070）各自都落在「只換隨機種子重訓，分數本身就會飄動」的幅度內，所以不是獨立的統計證據（見下方「結果」）。
+**力氣花在哪。** 不是加大模型，而是物理一致的資料增強、學習式的感測器校正，以及一套我信得過的評估方法。這些帶來的小幅分數進步，各自都落在「只換隨機種子（訓練開始時的隨機設定）重訓，分數本身就會飄動」的幅度內，所以不是獨立的統計證據（見下方「結果」）。我是單人隊伍參賽，從加入比賽到交件約兩週。
 
 **我的角色。** 我是單人 Kaggle 隊伍的研究負責人：研究方向、取捨、驗證規則與每一次提交，都由我做最後決定。實作與實驗執行由 AI coding agent（Claude Code、Codex）在我的指揮下完成。這份工作的一部分是怎麼指揮它們，讓 AI 不會自己改自己的考卷：先拿出一部分資料完全不讓模型看、看結果前先寫下怎樣才算有效、讓另一個模型重算第一個模型的數字、紅方審查（另一個模型專門挑錯）。人類作者只有我一人；哪些是我做的、哪些是借用的，見 [`docs/post_competition.md`](docs/post_competition.md)（英文）。
 
-**賽後延伸（與名次分開）。** 另一支參賽隊伍（thisray）賽後公開了一套後處理方法，我把它接到我的網路上（階段一），再加兩步自己的：地面機器人的修正（只套一半強度，階段二）和平滑時依每個視窗的不確定度加權（階段三）。比賽最終模型在測試資料公開／私有兩半的分數是 0.32793／0.19912。Kaggle 對賽後晚交件回傳的分數是 **0.22342／0.13903**；我換算成官方全測口徑約 0.178（誤差約 ±0.0005；比賽提交在同一口徑為 0.25878）。這是**交件截止後、借用他人工具、用了測試分數回饋、沒有名次**的結果，大部分進步來自借來的方法。各階段數字與負結果見 [`docs/post_competition.md`](docs/post_competition.md)（英文）。
+**賽後延伸（與名次分開）。** 另一支參賽隊伍（thisray）賽後公開了一套後處理方法（用物理規則修正模型輸出的步驟），我把它接到我的網路上；再加兩個自己的小步驟：地面機器人的修正（只套一半強度），以及平滑時依模型對每個視窗的不確定程度加權。這是**交件截止後、借用他人工具、用了測試分數回饋、沒有名次**的結果，大部分進步來自借來的方法，我加的兩步只多進步一點點。各階段分數、數字與負結果見 [`docs/post_competition.md`](docs/post_competition.md)（英文）。
 
 **關於測試回饋的揭露。** 2026-09-30（比賽結束後），我另外提交了約 89 個探針檔，每個只改一條測試序列，用來還原哪些序列屬於公開半邊、哪些屬於私有半邊（41 條與 48 條）。這樣量到的數值沒有用來調整任何輸出，但探針與 33 次官方查詢的結果曾用於診斷。我還沒有問過主辦方這個方法能不能公開描述。完整說明見 [`docs/post_competition.md`](docs/post_competition.md#5-process-and-disclosure)。
 
 **下一步。** 可試的方向我大致都試過了；下一步是把模型部署到實體機器人上，讓它成為真的能運作的系統。
 
-<p align="center"><img src="figures/post_competition_stages_zh.png" width="560" alt="Kaggle 公開／私有兩半的分數：比賽最終模型，以及賽後三個階段"></p>
+**數字在哪。** 分數、與主辦方基線的比較、模型大小、工作規模與遵守的規則，都在下方[「結果」](#結果)（總覽表：[總覽](#總覽)）；每個數字的來源見 [`docs/canonical_numbers.md`](docs/canonical_numbers.md)。
+
+<p align="center"><img src="figures/overview_zh.png" width="900" alt="白話版流程圖：原始 IMU 訊號、自動校正感測器、估計重力方向、神經網路讀 40 秒上下文、每秒輸出一筆速度；下方虛線框為不計名次的賽後延伸（接上公開後處理方法、地面機器人修正、逐窗不確定度平滑）"></p>
 
 **連結。** [比賽頁](https://superodometry.com/imuchallenge/)（CMU AirLab／Super Odometry Group，IROS 2026 工作坊 *Beyond Exteroception* 的官方基準）· [Kaggle 比賽](https://www.kaggle.com/competitions/tartan-imu-challenge-iros2026) · [我的 Kaggle 個人檔案（20/131）](https://www.kaggle.com/lexhoooo/competitions) · [Kaggle 私榜（暫定；2026-09-28 擷取），隊名 `Lexxxxx`](https://www.kaggle.com/competitions/tartan-imu-challenge-iros2026/leaderboard?search=Lexxxxx) · 🤗 [LexHo/tartanimu-a3v20](https://huggingface.co/LexHo/tartanimu-a3v20)（比賽最終模型：凍結權重、實際計分的 `submission.csv`、可在 CPU 重現的 `predict.py`）· 🤗 [LexHo/tartanimu-a3v21](https://huggingface.co/LexHo/tartanimu-a3v21)（第二提交）· [技術報告（PDF，英文）](report/technical_report.pdf)
 
 作者：何皓廷（Hao-Ting Ho），東海大學電機工程學系 · lexho2005@gmail.com
 
-<p align="center"><img src="figures/overview_zh.png" width="900" alt="白話版流程圖：原始 IMU 訊號、自動校正感測器、估計重力方向、神經網路讀 40 秒上下文、每秒輸出一筆速度；下方虛線框為不計名次的賽後延伸（接上公開後處理方法、地面機器人修正、逐窗不確定度平滑）"></p>
-
 這個 repo 是整件工作的精選紀錄：模型與訓練程式、我自己建的評估方法、雲端自動化、交給主辦方的技術報告，以及逐日紀錄：量了什麼、據此做了什麼決定、結果與預期哪裡不同。
-
-| | |
-|---|---|
-| **成績** | Kaggle 私榜第 20 名（131 隊，分數 0.19912）；主辦方後續將本隊列為前十隊伍之一（2026-10-09 主辦方來信），官方最終名次尚未公布。官方全測 0.25878；比賽最終模型 `a3v20_s42` |
-| **任務** | 只用六軸 IMU，離線估計機器人自身座標系下的三維速度；四種載具共用一個模型 |
-| **模型** | 2.17M 參數＋兩個凍結輔助模組 78k；一維卷積網路 → 跨 40 個一秒視窗的雙向 GRU → 直接預測速度，再加一個把速度在視窗之間接力的物理步驟 |
-| **工作規模** | 約 500 個訓練 run（含失敗與診斷 run）、約 6 萬個訓練 epoch 紀錄列、33 次官方計分查詢、比賽期間 26 次 Kaggle 提交；9/8 加入、9/21 交件（約兩週） |
-| **遵守的規則** | 一份訓練好的權重檔、不依載具切換子模型、無 ensemble、無測試時擴增或多視角平均（唯一的平均是模型自身輸出在重疊 chunk 之間的平均，stride K/2）、比賽最終模型未用外部資料、從未使用測試標籤（揭露事項見 [`docs/canonical_numbers.md §D`](docs/canonical_numbers.md)；賽後的探針提交見 [`docs/post_competition.md`](docs/post_competition.md#5-process-and-disclosure)） |
 
 ---
 
@@ -56,6 +48,20 @@
 ### 模型釋出
 
 兩個 Hugging Face repo（比賽最終模型與第二提交），內容含凍結權重、`predict.py`、實際計分的 `submission.csv`、`SHA256SUMS`、合規聲明。在隔離環境（封鎖網路、空 cache）於 CPU 約 85 秒即可重現計分檔，最大分量差 1.9×10⁻³ m/s；重新下載後又驗過一次。
+
+### 總覽
+
+| | |
+|---|---|
+| **成績** | 主辦方內部評比第 12 名（2026-11-19 主辦方回覆）；Kaggle 私榜第 20 名（131 隊，分數 0.19912）。官方全測 0.25878；比賽最終模型 `a3v20_s42` |
+| **任務** | 只用六軸 IMU，離線估計機器人自身座標系下的三維速度；四種載具共用一個模型 |
+| **模型** | 2.17M 參數＋兩個凍結輔助模組 78k（第一屏拿來比較的 thisray 網路是 43.7M）；一維卷積網路 → 跨 40 個一秒視窗的雙向 GRU → 直接預測速度，再加一個把速度在視窗之間接力的物理步驟 |
+| **工作規模** | 約 500 個訓練 run（含失敗與診斷 run）、約 6 萬個訓練 epoch 紀錄列、33 次官方計分查詢、比賽期間 26 次 Kaggle 提交；9/8 加入、9/21 交件（約兩週） |
+| **遵守的規則** | 一份訓練好的權重檔、不依載具切換子模型、無 ensemble、無測試時擴增或多視角平均（唯一的平均是模型自身輸出在重疊 chunk 之間的平均，stride K/2）、比賽最終模型未用外部資料、從未使用測試標籤（揭露事項見 [`docs/canonical_numbers.md §D`](docs/canonical_numbers.md)；賽後的探針提交見 [`docs/post_competition.md`](docs/post_competition.md#5-process-and-disclosure)） |
+
+賽後補交、Kaggle 回傳的分數（不計名次；階段一是借自另一隊 thisray 的方法，大部分下降來自它；不應讀成比賽成績的延續；明細見 [`docs/post_competition.md`](docs/post_competition.md)）：
+
+<p align="center"><img src="figures/post_competition_stages_zh.png" width="560" alt="Kaggle 公開／私有兩半的分數：比賽最終模型，以及賽後三個階段"></p>
 
 ## 方法：我怎麼避免騙自己
 技術版流程圖：
@@ -84,7 +90,7 @@
 |---|---|
 | [`portfolio/`](portfolio/) | 一頁摘要（PDF，中英） |
 | [`docs/post_competition.md`](docs/post_competition.md) | 賽後三個階段：Kaggle 分數、借用與自己做的區分、留出檢驗、負結果（英文） |
-| [`docs/results.md`](docs/results.md) | 最終名次、榜單背景、每一步買到什麼、限制、如何查證（英文） |
+| [`docs/results.md`](docs/results.md) | Kaggle 榜單名次（暫定）、榜單背景、每一步買到什麼、限制、如何查證（英文） |
 | [`report/technical_report.pdf`](report/technical_report.pdf) | 交給主辦方的技術報告（IROS 工作坊範本） |
 | [`docs/chronicle.md`](docs/chronicle.md) | 兩週逐日紀錄、架構演進、每次官方查詢、負結果目錄、合規紀錄 |
 | [`docs/workflow_playbook.md`](docs/workflow_playbook.md) | 反覆出現的十個問題，整理成八層工作流程與決策樹 |

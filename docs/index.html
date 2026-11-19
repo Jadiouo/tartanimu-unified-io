@@ -87,10 +87,10 @@ details p,details li{font-size:14px;color:var(--muted);margin-bottom:6px}
 <svg class="trace" viewBox="0 0 420 150" aria-hidden="true"><path d="M0 120 C40 120 50 40 100 50 S160 130 210 90 S290 10 340 40 S400 100 420 70"/><path class="b" d="M0 128 C45 126 52 52 100 60 S165 128 212 100 S292 24 340 52 S402 104 420 84"/></svg>
 <p class="kicker">IROS 2026 · TARTANIMU CHALLENGE</p>
 <h1><span class="zh">只靠 IMU 估計速度，<br>一組權重通吃四種載具</span><span class="en">Velocity from an IMU alone,<br>one set of weights, four robots</span></h1>
-<p class="sub"><span class="zh">讓機器人只靠一顆 IMU（量加速度與轉動的小感測器）估計自己的速度。我單人參賽，在 131 隊中拿到 Kaggle 私榜第 20 名，模型的參數量只有另一支強隊的約二十分之一。</span><span class="en">The goal: let a robot estimate its own velocity from a single IMU, a small sensor that measures acceleration and rotation. I entered alone and placed 20th of 131 on the Kaggle private leaderboard, with a model whose parameter count is about one-twentieth of a strong rival's.</span></p>
+<p class="sub"><span class="zh">讓機器人只靠一顆 IMU（量加速度與轉動的小感測器）估計自己的速度。我單人參賽，在主辦方的內部評比拿到第 12 名（Kaggle 私榜第 20 名，共 131 隊），模型的參數量只有另一支強隊的約二十分之一。</span><span class="en">The goal: let a robot estimate its own velocity from a single IMU, a small sensor that measures acceleration and rotation. I entered alone and placed 12th in the organizers' internal evaluation (20th of 131 on the Kaggle private leaderboard), with a model whose parameter count is about one-twentieth of a strong rival's.</span></p>
 <p class="name">Hao-Ting Ho · <span class="zh">何皓廷 · 東海大學電機系</span><span class="en">Dept. of Electrical Engineering, Tunghai University</span> · lexho2005@gmail.com</p>
 <div class="stats">
-<div class="stat"><b>20 / 131</b><span><span class="zh">Kaggle 私榜名次。主辦方後續將本隊列為前十隊伍之一，官方最終名次尚未公布。</span><span class="en">Kaggle private leaderboard rank. The organizers later listed our team among the top 10; the official final ranking is not yet announced.</span></span></div>
+<div class="stat"><b class="zh">第 12 名</b><b class="en">12th</b><span><span class="zh">主辦方內部評比（2026-11-19 主辦方回覆）。Kaggle 私榜第 20 名，共 131 隊。</span><span class="en">Organizers' internal evaluation (organizers' reply, 2026-11-19). 20th of 131 on the Kaggle private leaderboard.</span></span></div>
 <div class="stat"><b class="zh">約二十分之一</b><b class="en">about 1/20</b><span><span class="zh">模型大小（參數量），相對於另一支強隊的網路</span><span class="en">model size (parameters) compared with the network of one strong rival team</span></span></div>
 <div class="stat"><b class="zh">約一半</b><b class="en">about half</b><span><span class="zh">官方分數約為主辦方參考模型（基線）的一半（越低越好）</span><span class="en">official score is about half of the organizer baseline (lower is better)</span></span></div>
 <div class="stat"><b><span class="zh">研究負責人</span><span class="en">Research lead</span></b><span><span class="zh">方向、取捨、驗證規則、每次提交由我決定。實作由 AI agent（Claude Code、Codex）</span><span class="en">I set direction, trade-offs, validation rules and every submission; implementation by AI agents (Claude Code, Codex)</span></span></div>
@@ -105,10 +105,12 @@ details p,details li{font-size:14px;color:var(--muted);margin-bottom:6px}
 <section><h2><i>02</i><span class="zh">比賽成績</span><span class="en">Contest result</span></h2>
 <div class="dark">
 <p class="hl zh">名次</p><p class="hl en">RANKING</p>
-<p class="zh">Kaggle 私榜第 20 名（131 隊）；主辦方後續將本隊列為前十隊伍之一（2026-10-09 主辦方來信），官方最終名次尚未公布。</p>
-<p class="en">20th of 131 on the Kaggle private leaderboard; the organizers subsequently listed our team among the top 10 (organizers' e-mail, 2026-10-09); the official final ranking has not been announced.</p>
+<p class="zh">主辦方內部評比第 12 名（2026-11-19 主辦方回覆）；Kaggle 私榜第 20 名（131 隊）。</p>
+<p class="en">12th in the organizers' internal evaluation (organizers' reply, 2026-11-19); 20th of 131 on the Kaggle private leaderboard.</p>
 <p class="mu zh">私榜：比賽結束後才公布排名的那一半測試資料。</p>
 <p class="mu en">Private leaderboard: the half of the test data whose ranking was published only after the contest closed.</p>
+<p class="mu zh">Kaggle 的排名是暫定的；依主辦方比賽頁，正式名次由主辦方另行評定。</p>
+<p class="mu en">The Kaggle leaderboard is provisional; according to the challenge page, official standings are decided by the organizers.</p>
 <p class="mu zh">受邀參與主辦方的 IMU Foundation Model 白皮書討論；目前未列為作者，白皮書尚未發表。</p>
 <p class="mu en">Invited to take part in the organizers' discussion of the forthcoming IMU Foundation Model white paper. Not a listed author; the paper is unpublished.</p>
 </div>
@@ -194,7 +196,7 @@ details p,details li{font-size:14px;color:var(--muted);margin-bottom:6px}
 <li>階段二的一半強度是看過留出資料才選的，三次檢驗用同一批，不能說已在新場次證明有效。</li>
 <li>在留出的地面錄製上，階段二比完整後處理好約 6%（三次檢驗：原本的權重、同種子重訓一次、換種子重訓一次，結果一致）。</li>
 <li>完整後處理讓無人機的速度誤差約少一半，車子的約增加 15%。</li>
-<li>我的階段一和 thisray 公布的成績（取自其報告，我未重驗）差距，小於只換種子的起伏，不能說誰較好。</li>
+<li>我的階段一和 thisray 公布的成績（取自其報告，我未重驗）差距，和只換種子的起伏同一量級，不能說誰較好。</li>
 <li>完整表格與算法見 <a href="https://github.com/Jadiouo/tartanimu-unified-io/blob/main/docs/post_competition.md" target="_blank" rel="noopener">post_competition.md</a>。</li>
 </ul>
 <ul class="en">
@@ -204,7 +206,7 @@ details p,details li{font-size:14px;color:var(--muted);margin-bottom:6px}
 <li>The half strength in Step 2 was chosen after seeing the held-out data, and all three checks reuse that set, so it is not shown to hold on new sessions.</li>
 <li>On the held-out ground recordings, Step 2 is about 6% better than the full post-processing (three checks: the original weights, one retraining with the same seed and one with a different seed, all consistent).</li>
 <li>The full post-processing cuts the drone's velocity error by about half and raises the car's by about 15%.</li>
-<li>The gap between my Step 1 and the score thisray reports (from their report, not re-verified) is smaller than the swing from the random seed, so I cannot say which is better.</li>
+<li>The gap between my Step 1 and the score thisray reports (from their report, not re-verified) is about the size of the swing from the random seed, so I cannot say which is better.</li>
 <li>Full table and method: <a href="https://github.com/Jadiouo/tartanimu-unified-io/blob/main/docs/post_competition.md" target="_blank" rel="noopener">post_competition.md</a>.</li>
 </ul>
 </details>

@@ -9,7 +9,7 @@ Every number and wording follows this file; change here first, then sync the oth
 | Item | Value |
 |---|---|
 | Team (Kaggle) | `Lexxxxx` (single human author; implementation by AI coding agents under my direction); contact lexho2005@gmail.com |
-| **Kaggle private leaderboard (provisional; as recorded on 2026-09-28)** | **20th of 131 on the Kaggle private leaderboard; the organizers subsequently listed our team among the top 10 (organizers' e-mail, 2026-10-09); the official final ranking has not been announced.** Private score **0.19912**; a3v20 public 0.32793 (the leaderboard column shows 0.32695, the best public over all my submissions, from a3v21) |
+| **Ranking (internal evaluation: organizers' reply, 2026-11-19; Kaggle private leaderboard: provisional, as recorded on 2026-09-28)** | **12th in the organizers' internal evaluation (organizers' reply, 2026-11-19); 20th of 131 on the Kaggle private leaderboard.** Private score **0.19912**; a3v20 public 0.32793 (the leaderboard column shows 0.32695, the best public over all my submissions, from a3v21) |
 | Main submission (Kaggle final #1, HF, report subject) | `a3v20_s42`, CSV `sub_test_a3v20_s42.csv`, md5 `545d7cddc859a16db045f872251be03c` |
 | Official full test (scoring service) | **Score 0.25878**, macro ATE20 0.61704, macro AVE 0.22017, RTE 0.95368 |
 | Official per-platform ATE20 / AVE / RTE | car 0.34105 / 0.0703 / 0.26476; human 0.58245 / 0.05459 / 0.30122; quadruped 0.3451 / 0.08106 / 0.3749; drone 1.19955 / 0.67472 / 2.87383 |
@@ -61,7 +61,7 @@ Single unified model, one shared set of weights for all four platforms. Two smal
 - Timeline: joined 2026-09-08, delivered 09-21 (about two weeks). The competition itself opened earlier.
 
 ## H. Corrections 2026-10-16 (second pass)
-- Standing is written in full: 20th of 131 on the Kaggle private leaderboard, plus the organizers' 2026-10-09 e-mail listing the team among the top 10; the official final ranking has not been announced. Never "top 10" alone.
+- Standing is written in full: 12th in the organizers' internal evaluation (organizers' reply, 2026-11-19); 20th of 131 on the Kaggle private leaderboard. Never "12th" without "in the organizers' internal evaluation", and never "12th of 131". (Updated 2026-11-19, replacing the earlier wording.)
 - Contact e-mail: lexho2005@gmail.com.
 - Roughly 89 post-competition probe submissions are disclosed in the README and `post_competition.md`.
 - Working-note code names (S-fast; post-competition stages A to G) are replaced in the README and one-page summaries by plain descriptions; the letters remain only where they match file names.

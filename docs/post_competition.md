@@ -1,6 +1,6 @@
 # After the competition (2026-09-30 to 10-16)
 
-**Everything on this page is post-competition work.** Late submissions on Kaggle do not count for the ranking. The contest result is: 20th of 131 on the Kaggle private leaderboard; the organizers subsequently listed our team among the top 10 (organizers' e-mail, 2026-10-09); the official final ranking has not been announced. The private score is 0.19912 and the official full-test score is 0.25878 (my final competition model, code name `a3v20`). The numbers below must not be read as a continuation of that rank or drawn on one "improvement line" with it.
+**Everything on this page is post-competition work.** Late submissions on Kaggle do not count for the ranking. The contest result is: 12th in the organizers' internal evaluation (organizers' reply, 2026-11-19); 20th of 131 on the Kaggle private leaderboard. The private score is 0.19912 and the official full-test score is 0.25878 (my final competition model, code name `a3v20`). The numbers below must not be read as a continuation of that rank or drawn on one "improvement line" with it.
 
 **Terms used on this page.**
 - *Public / private*: Kaggle splits the test data into two halves (41 and 48 sequences) and reports a score for each. Lower is better; an all-zero prediction scores 1.0.

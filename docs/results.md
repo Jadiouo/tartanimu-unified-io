@@ -1,15 +1,15 @@
 # Results
 
-The contest figures on this page can be checked against public sources (links in §6). The post-competition late-submission scores in §5 are visible only from my own Kaggle account.
+The 12th place in the organizers' internal evaluation comes from the organizers' reply to me on 2026-11-19; I have no public link for it. The other contest figures on this page can be checked against public sources (links in §6). The post-competition late-submission scores in §5 are visible only from my own Kaggle account.
 
 **Terms.** *Private / public*: Kaggle splits the test data into two halves and reports a score for each (lower is better; predicting zero velocity everywhere scores 1.0). *AVE*: velocity error, metres per second. *ATE20*: trajectory position error, metres. *Sequence*: one test recording. *Final competition model* (code name `a3v20_s42`): the entry I delivered.
 
 ---
 
-## 1. Kaggle private leaderboard (provisional; as recorded on 2026-09-28)
+## 1. Ranking: organizers' internal evaluation, and the Kaggle private leaderboard (provisional; as recorded on 2026-09-28)
 
-**20th of 131 on the Kaggle private leaderboard; the organizers subsequently listed our team among the top 10 (organizers' e-mail, 2026-10-09); the official final ranking has not been announced.** IROS 2026 TartanIMU Challenge (CMU AirLab / Super Odometry), Kaggle team `Lexxxxx`, single human author (implementation by AI coding agents under my direction, see the README).
-Private leaderboard score **0.19912**; public score of the final competition model 0.32793 (the leaderboard's public column shows 0.32695, the best public over all my submissions, which belongs to my second entry). The competition closed 2026-09-21. The Kaggle private leaderboard shown here was recorded on 2026-09-28; the organizers describe it as provisional, and the official final ranking has not been announced.
+**12th in the organizers' internal evaluation (organizers' reply, 2026-11-19); 20th of 131 on the Kaggle private leaderboard.** IROS 2026 TartanIMU Challenge (CMU AirLab / Super Odometry), Kaggle team `Lexxxxx`, single human author (implementation by AI coding agents under my direction, see the README).
+Private leaderboard score **0.19912**; public score of the final competition model 0.32793 (the leaderboard's public column shows 0.32695, the best public over all my submissions, which belongs to my second entry). The competition closed 2026-09-21. The Kaggle private leaderboard shown here was recorded on 2026-09-28. The Kaggle leaderboard is provisional; according to the challenge page, official standings are decided by the organizers.
 
 | # | Team | Private score ↓ |
 |---:|---|---|
