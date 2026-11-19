@@ -6,10 +6,10 @@ The contest figures on this page can be checked against public sources (links in
 
 ---
 
-## 1. Kaggle private leaderboard (provisional; published 2026-09-28)
+## 1. Kaggle private leaderboard (provisional; as recorded on 2026-09-28)
 
 **20th of 131 on the Kaggle private leaderboard; the organizers subsequently listed our team among the top 10 (organizers' e-mail, 2026-10-09); the official final ranking has not been announced.** IROS 2026 TartanIMU Challenge (CMU AirLab / Super Odometry), Kaggle team `Lexxxxx`, single human author (implementation by AI coding agents under my direction, see the README).
-Private leaderboard score **0.19912**; public score of the final competition model 0.32793 (the leaderboard's public column shows 0.32695, the best public over all my submissions, which belongs to my second entry). The competition closed 2026-09-21. The Kaggle private leaderboard was published on 2026-09-28; the organizers describe it as provisional, and the official final ranking has not been announced.
+Private leaderboard score **0.19912**; public score of the final competition model 0.32793 (the leaderboard's public column shows 0.32695, the best public over all my submissions, which belongs to my second entry). The competition closed 2026-09-21. The Kaggle private leaderboard shown here was recorded on 2026-09-28; the organizers describe it as provisional, and the official final ranking has not been announced.
 
 | # | Team | Private score ↓ |
 |---:|---|---|

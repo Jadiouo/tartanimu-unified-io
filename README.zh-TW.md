@@ -20,7 +20,7 @@
 
 <p align="center"><img src="figures/post_competition_stages_zh.png" width="560" alt="Kaggle 公開／私有兩半的分數：比賽最終模型，以及賽後三個階段"></p>
 
-**連結。** [比賽頁](https://superodometry.com/imuchallenge/)（CMU AirLab／Super Odometry Group，IROS 2026 工作坊 *Beyond Exteroception* 的官方基準）· [Kaggle 比賽](https://www.kaggle.com/competitions/tartan-imu-challenge-iros2026) · [我的 Kaggle 個人檔案（20/131）](https://www.kaggle.com/lexhoooo/competitions) · [Kaggle 私榜（暫定；2026-09-28 公布），隊名 `Lexxxxx`](https://www.kaggle.com/competitions/tartan-imu-challenge-iros2026/leaderboard?search=Lexxxxx) · 🤗 [LexHo/tartanimu-a3v20](https://huggingface.co/LexHo/tartanimu-a3v20)（比賽最終模型：凍結權重、實際計分的 `submission.csv`、可在 CPU 重現的 `predict.py`）· 🤗 [LexHo/tartanimu-a3v21](https://huggingface.co/LexHo/tartanimu-a3v21)（第二提交）· [技術報告（PDF，英文）](report/technical_report.pdf)
+**連結。** [比賽頁](https://superodometry.com/imuchallenge/)（CMU AirLab／Super Odometry Group，IROS 2026 工作坊 *Beyond Exteroception* 的官方基準）· [Kaggle 比賽](https://www.kaggle.com/competitions/tartan-imu-challenge-iros2026) · [我的 Kaggle 個人檔案（20/131）](https://www.kaggle.com/lexhoooo/competitions) · [Kaggle 私榜（暫定；2026-09-28 擷取），隊名 `Lexxxxx`](https://www.kaggle.com/competitions/tartan-imu-challenge-iros2026/leaderboard?search=Lexxxxx) · 🤗 [LexHo/tartanimu-a3v20](https://huggingface.co/LexHo/tartanimu-a3v20)（比賽最終模型：凍結權重、實際計分的 `submission.csv`、可在 CPU 重現的 `predict.py`）· 🤗 [LexHo/tartanimu-a3v21](https://huggingface.co/LexHo/tartanimu-a3v21)（第二提交）· [技術報告（PDF，英文）](report/technical_report.pdf)
 
 作者：何皓廷（Hao-Ting Ho），東海大學電機工程學系 · lexho2005@gmail.com
 

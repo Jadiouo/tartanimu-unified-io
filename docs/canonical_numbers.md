@@ -9,7 +9,7 @@ Every number and wording follows this file; change here first, then sync the oth
 | Item | Value |
 |---|---|
 | Team (Kaggle) | `Lexxxxx` (single human author; implementation by AI coding agents under my direction); contact lexho2005@gmail.com |
-| **Kaggle private leaderboard (provisional; published 2026-09-28)** | **20th of 131 on the Kaggle private leaderboard; the organizers subsequently listed our team among the top 10 (organizers' e-mail, 2026-10-09); the official final ranking has not been announced.** Private score **0.19912**; a3v20 public 0.32793 (the leaderboard column shows 0.32695, the best public over all my submissions, from a3v21) |
+| **Kaggle private leaderboard (provisional; as recorded on 2026-09-28)** | **20th of 131 on the Kaggle private leaderboard; the organizers subsequently listed our team among the top 10 (organizers' e-mail, 2026-10-09); the official final ranking has not been announced.** Private score **0.19912**; a3v20 public 0.32793 (the leaderboard column shows 0.32695, the best public over all my submissions, from a3v21) |
 | Main submission (Kaggle final #1, HF, report subject) | `a3v20_s42`, CSV `sub_test_a3v20_s42.csv`, md5 `545d7cddc859a16db045f872251be03c` |
 | Official full test (scoring service) | **Score 0.25878**, macro ATE20 0.61704, macro AVE 0.22017, RTE 0.95368 |
 | Official per-platform ATE20 / AVE / RTE | car 0.34105 / 0.0703 / 0.26476; human 0.58245 / 0.05459 / 0.30122; quadruped 0.3451 / 0.08106 / 0.3749; drone 1.19955 / 0.67472 / 2.87383 |

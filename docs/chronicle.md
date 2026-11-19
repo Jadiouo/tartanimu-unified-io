@@ -29,7 +29,7 @@ A day-by-day record of the two weeks (joined 2026-09-08, delivered 09-21): what 
 
 | | |
 |---|---|
-| Kaggle private leaderboard (provisional; published 2026-09-28) | **20th of 131 teams** (private leaderboard 0.19912) |
+| Kaggle private leaderboard (provisional; as recorded on 2026-09-28) | **20th of 131 teams** (private leaderboard 0.19912) |
 | Delivered | **a3v20_s42**: official **0.25878** (ATE20 0.61704 / AVE 0.22017), public 0.32793; HF `LexHo/tartanimu-a3v20` |
 | Second entry | a3v21_s42: official 0.26306, public 0.32695; HF `LexHo/tartanimu-a3v21` |
 | Start → end | val 1.015 (all-zero) → 0.1746 (tv_film); public 1.054 → 0.3270; official 0.3057 (first query, 9/12) → 0.2588 |
@@ -138,7 +138,7 @@ A day-by-day record of the two weeks (joined 2026-09-08, delivered 09-21): what 
 - HF: `LexHo/tartanimu-a3v20` (public, commit 2426e014; after re-download, isolated dry-run 85 s / 2.0 GB / max diff 1.9e-3), `LexHo/tartanimu-a3v21` (1b0d0829; 69 s / 1.4 GB / 1.6e-3). Forms submitted; technical report v5.1 (eight investigations) attached.
 
 ### 9/28 (Sun) Kaggle private leaderboard (provisional)
-- The private leaderboard was published: **20th of 131 teams, 0.19912** (`a3v20_s42`, the delivered model). Public column 0.32695 (best public over all my submissions, from a3v21; the delivered a3v20 scored 0.32793 public).
+- The private leaderboard, as recorded on this date (the organizers describe it as provisional; the official final ranking has not been announced): **20th of 131 teams, 0.19912** (`a3v20_s42`, the delivered model). Public column 0.32695 (best public over all my submissions, from a3v21; the delivered a3v20 scored 0.32793 public).
 - The private half ranks fourteen of my submissions between 0.1932 and 0.2094 — seven ranks. The best of them on that half would have been 18th (`a3dnTV3td`, the day-7 model); on the full 89-sequence test, which is the better estimator, the delivered model beats both other candidate entries. On that estimator the rule's pick ranked first of the three candidate entries, within seed noise.
 - No certificate is issued: the competition is a Kaggle Community competition (reward "Kudos", no medals or points), and the organisers' only announced recognition is an invitation to the *IMU Foundation Model* white paper for the top 10. Verification links and exports: `docs/results.md` §6 and `docs/evidence/`.
 
